@@ -8,9 +8,12 @@ import { cn } from "@/lib/utils";
 export default function FooterGame() {
   const pathname = usePathname();
 
+  // Número de notificaciones para "Misiones"
+  const missionNotifications = 5; // Cambia este número según sea necesario
+
   return (
-    <footer className="fixed bottom-0 w-full shadow-md py-4 bg-gray-50">
-      <div className="flex justify-center gap-12 max-w-4xl mx-auto">
+    <footer className="fixed bottom-0 w-full shadow-md py-2 pt-4 bg-gray-50">
+      <div className="flex justify-between gap-4 sm:gap-8 md:gap-12 max-w-4xl mx-auto px-4">
         {/* Enlace Mi Dragon */}
         <Link href="/dragon">
           <div
@@ -19,10 +22,16 @@ export default function FooterGame() {
               pathname === "/dragon" && "brightness-150 scale-110"
             )}
           >
-            <Image src="/home.svg" alt="Mi Dragon" width={140} height={140} />
+            <Image
+              src="/home.svg"
+              alt="Mi Dragon"
+              width={80}
+              height={80}
+              className="sm:w-100 sm:h-100 md:w-120 md:h-120"
+            />
             <span
               className={cn(
-                "text-sm font-medium",
+                "text-xs sm:text-sm md:text-base font-medium",
                 pathname === "/dragon" && "text-blue-600 font-bold"
               )}
             >
@@ -42,13 +51,13 @@ export default function FooterGame() {
             <Image
               src="/game.svg"
               alt="Juegos"
-              width={140}
-              height={140}
-              className="mb-2"
+              width={80}
+              height={80}
+              className="sm:w-100 sm:h-100 md:w-120 md:h-120 mb-2"
             />
             <span
               className={cn(
-                "text-sm font-medium",
+                "text-xs sm:text-sm md:text-base font-medium",
                 pathname === "/games" && "text-blue-600 font-bold"
               )}
             >
@@ -61,20 +70,26 @@ export default function FooterGame() {
         <Link href="/missions">
           <div
             className={cn(
-              "cursor-pointer flex flex-col items-center transition-all",
+              "relative cursor-pointer flex flex-col items-center transition-all",
               pathname === "/missions" && "brightness-150 scale-110"
             )}
           >
             <Image
               src="/misiones.svg"
               alt="Misiones"
-              width={140}
-              height={140}
-              className="mb-2"
+              width={80}
+              height={80}
+              className="sm:w-100 sm:h-100 md:w-120 md:h-120 mb-2"
             />
+            {/* Círculo flotante para notificaciones */}
+            {missionNotifications > 0 && (
+              <div className="absolute top-[-8px] right-[-10px] bg-red-500 text-white text-xs sm:text-sm md:text-base font-bold w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full shadow">
+                {missionNotifications}
+              </div>
+            )}
             <span
               className={cn(
-                "text-sm font-medium",
+                "text-xs sm:text-sm md:text-base font-medium",
                 pathname === "/missions" && "text-blue-600 font-bold"
               )}
             >
@@ -92,15 +107,15 @@ export default function FooterGame() {
             )}
           >
             <Image
-              src="/granja.svg"
-              alt="Granja"
-              width={140}
-              height={140}
-              className="mb-2"
+              src="/gastos.svg"
+              alt="goals"
+              width={80}
+              height={80}
+              className="sm:w-100 sm:h-100 md:w-120 md:h-120 mb-2"
             />
             <span
               className={cn(
-                "text-sm font-medium",
+                "text-xs sm:text-sm md:text-base font-medium",
                 pathname === "/farm" && "text-blue-600 font-bold"
               )}
             >
