@@ -7,9 +7,9 @@ import Link from "next/link";
 
 export default function DragonPage() {
   return (
-    <div className="min-h-screen flex flex-col ">
+    <div className="min-h-screen flex flex-col bg-sky-100">
       {/* Header */}
-      <header className="w-full">
+      <header className="w-full shadow-md">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
           <Link href="/missions">
             <Card className="p-2 cursor-pointer">
@@ -39,8 +39,8 @@ export default function DragonPage() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-center items-center p-4">
         <div className="flex flex-col items-center justify-center gap-6">
-          {/* Imagen de la mascota */}
-          <div className="relative w-64 h-64">
+          {/* Imagen de la mascota con animación */}
+          <div className="relative w-64 h-64 animate-bounce">
             <Image
               src="/2.png"
               alt="Mascota del juego"
