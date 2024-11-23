@@ -61,6 +61,10 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        "radial-sky":
+          "radial-gradient(60% 120% at 50% 50%, hsla(200, 80%, 92%, 0) 0%, rgba(186, 230, 253, 0.5) 100%)",
+      },
     },
   },
   plugins: [animate],
