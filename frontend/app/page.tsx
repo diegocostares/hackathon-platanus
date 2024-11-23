@@ -1,56 +1,76 @@
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Card, CardContent } from "@/components/ui/card";
+import { Leaf, Trophy, Gamepad2, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import ExperienceBar from "./components/ExperienceBar";
-import TreasureDisplay from "./components/TreasureDisplay";
-import DailyMissions from "./components/DailyMissions";
-import Goals from "./components/Goals";
-import BuyButton from "./components/BuyButton";
-import AdventureButton from "./components/AdventureButton";
 
-export default function Home() {
+export default function GameInterface() {
   return (
-    <main className="min-h-screen bg-gray-800 text-white p-4 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/cave-background.jpg"
-          alt="Cave with gold mountains"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-        />
-      </div>
+    <div className="min-h-screen flex flex-col bg-sky-100">
+      {/* Header */}
+      <header className="w-fullshadow-md">
+        <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
+          <Card className="p-2">
+            <Leaf className="w-6 h-6 text-green-600" />
+          </Card>
 
-      {/* Game content */}
-      <div className="relative z-10">
-        {/* Top section */}
-        <div className="mb-4">
-          <TreasureDisplay amount={1000} />
-          <ExperienceBar current={75} max={100} />
-        </div>
+          <Card className="px-4 py-2">
+            <div className="flex items-center gap-2">
+              <span className="text-yellow-600 text-2xl">💰</span>
+              <span className="font-bold text-xl">1000</span>
+            </div>
+          </Card>
 
-        {/* Side sections */}
-        <div className="flex justify-between mb-4">
-          <DailyMissions />
-          <Goals />
-        </div>
+          <Card className="p-2 flex items-center gap-2">
+            <Trophy className="w-6 h-6 text-yellow-600" />
+            <span className="font-bold">Meta</span>
+          </Card>
+        </CardContent>
+      </header>
 
-        {/* Central character */}
-        <div className="flex justify-center items-center my-8">
-          <Image
-            src="/dragon.png"
-            alt="Cute dragon character"
-            width={300}
-            height={300}
-            className="drop-shadow-2xl"
-          />
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col justify-center items-center p-4">
+        <div className="flex flex-col items-center justify-center gap-6">
+          {/* Imagen de la mascota */}
+          <div className="relative w-64 h-64">
+            <Image
+              src="/1.png"
+              alt="Mascota del juego"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
+          {/* Barra de experiencia */}
+          <div className="w-full max-w-md">
+            <Progress value={33} className="h-4" />
+            <p className="text-center mt-2 text-sm text-muted-foreground">
+              Experiencia
+            </p>
+          </div>
         </div>
+      </main>
 
-        {/* Bottom section */}
-        <div className="flex justify-center space-x-4">
-          <BuyButton />
-          <AdventureButton />
+      {/* Footer */}
+      <footer className="w-full shadow-md py-4">
+        <div className="flex justify-center gap-4 max-w-4xl mx-auto">
+          <Button
+            variant="outline"
+            size="lg"
+            className="flex items-center gap-2"
+          >
+            <Gamepad2 className="w-5 h-5" />
+            Juegos
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="flex items-center gap-2"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            Compras
+          </Button>
         </div>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }
