@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 export default function DinosaurGame() {
@@ -164,6 +166,26 @@ export default function DinosaurGame() {
     <div className="flex flex-col items-center">
       <canvas ref={canvasRef} className="border" />
       <p className="text-center mt-4">Tap or Press Space/Up Arrow to Jump</p>
+
+      {/* Updated Buttons */}
+      <div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
+        <Link href="/games">
+          <Button
+            size="lg"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+          >
+            Volver a Juegos
+          </Button>
+        </Link>
+        <Link href="/dragon">
+          <Button
+            size="lg"
+            className="w-full bg-green-500 hover:bg-green-600 text-white"
+          >
+            Volver a la Página Principal
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
