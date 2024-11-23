@@ -6,16 +6,14 @@ export default function FlappyBirdGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number>();
 
-  // Use both useState and useRef for score
   const [score, setScore] = useState(0);
-  const scoreRef = useRef(0); // Holds the latest score value
+  const scoreRef = useRef(0);
 
   const gameOver = useRef<boolean>(false);
 
-  // Move game variables outside of useEffect and manage with useRef
   const bird = useRef({
     x: 50,
-    y: 300, // Assuming canvas height is 600
+    y: 300,
     width: 30,
     height: 30,
     velocity: 0,
@@ -46,7 +44,6 @@ export default function FlappyBirdGame() {
       const pipeX = canvas.width;
       const pipeY = Math.random() * (canvas.height - gap - 200) + 100;
 
-      // Top pipe
       pipes.current.push({
         x: pipeX,
         y: 0,
@@ -54,7 +51,6 @@ export default function FlappyBirdGame() {
         height: pipeY,
         passed: false,
       });
-      // Bottom pipe
       pipes.current.push({
         x: pipeX,
         y: pipeY + gap,
@@ -69,17 +65,13 @@ export default function FlappyBirdGame() {
       setScore(0);
       scoreRef.current = 0;
 
-      // Reset bird position and velocity
       bird.current.x = 50;
       bird.current.y = canvas.height / 2;
       bird.current.velocity = 0;
 
-      // Clear pipes
       pipes.current = [];
-      // Reset frame count
       frameCount.current = 0;
 
-      // Restart the game loop
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
@@ -93,11 +85,9 @@ export default function FlappyBirdGame() {
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update bird
       bird.current.velocity += bird.current.gravity;
       bird.current.y += bird.current.velocity;
 
-      // Draw bird
       context.fillStyle = "#FFA500";
       context.fillRect(
         bird.current.x,
@@ -106,21 +96,17 @@ export default function FlappyBirdGame() {
         bird.current.height
       );
 
-      // Spawn pipes every 100 frames
       if (frameCount.current % 100 === 0) {
         spawnPipe();
       }
 
-      // Update and draw pipes
       for (let i = 0; i < pipes.current.length; i++) {
         const pipe = pipes.current[i];
         pipe.x -= 2;
 
-        // Draw pipe
         context.fillStyle = "#228B22";
         context.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
 
-        // Collision detection
         if (
           bird.current.x < pipe.x + pipe.width &&
           bird.current.x + bird.current.width > pipe.x &&
@@ -133,21 +119,18 @@ export default function FlappyBirdGame() {
           return;
         }
 
-        // Increase score when bird passes pipes
         if (!pipe.passed && pipe.x + pipe.width < bird.current.x) {
           pipe.passed = true;
           scoreRef.current += 0.5;
           setScore(scoreRef.current);
         }
 
-        // Remove off-screen pipes
         if (pipe.x + pipe.width < 0) {
           pipes.current.splice(i, 1);
           i--;
         }
       }
 
-      // Check if bird hits the ground or goes off the top
       if (
         bird.current.y + bird.current.height > canvas.height ||
         bird.current.y < 0
@@ -158,7 +141,6 @@ export default function FlappyBirdGame() {
         return;
       }
 
-      // Draw score
       context.fillStyle = "#000000";
       context.font = "20px Arial";
       context.fillText(`Score: ${Math.floor(scoreRef.current)}`, 10, 30);
@@ -166,14 +148,13 @@ export default function FlappyBirdGame() {
       animationFrameId.current = requestAnimationFrame(gameLoop);
     };
 
-    // Start the game loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(animationFrameId.current!);
     };
-  }, []); // Empty dependency array ensures useEffect runs only once
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
