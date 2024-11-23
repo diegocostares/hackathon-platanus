@@ -3,30 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Calendar, CheckCircle, Clock } from "lucide-react";
 import Link from "next/link";
+import GeneralNavbar from "@/components/generalNavbar";
 
 export default function SavingsGoalPage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="w-full">
-        <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
-          <Link href="/dragon">
-            <Card className="p-2 cursor-pointer">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-6 h-6 text-blue-600" />
-                <span className="font-bold">Volver</span>
-              </div>
-            </Card>
-          </Link>
-
-          <Card className="px-4 py-2">
-            <div className="flex items-center gap-2">
-              <span className="text-yellow-600 text-2xl">💰</span>
-              <span className="font-bold text-xl">1000</span>
-            </div>
-          </Card>
-        </CardContent>
-      </header>
+      <GeneralNavbar />
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center p-6">

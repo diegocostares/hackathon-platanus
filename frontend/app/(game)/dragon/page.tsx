@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Gamepad2, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,38 +7,19 @@ export default function DragonPage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="w-full shadow-md">
+      <header className="w-full">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
-          {/* <Link href="/missions">
-            <Card className="p-2 cursor-pointer">
-              <div className="flex items-center gap-2">
-                <Trophy className="w-6 h-6 text-green-600" />
-                <span className="font-bold">Misiones Diarias</span>
-              </div>
-            </Card>
-          </Link> */}
-          {/* <div>
-            <Link href="./">
-              <Image
-                src="/mascotIcon.png"
-                alt="Mascotas"
-                layout="fill"
-                objectFit="contain"
-              />
-            </Link>
-          </div> */}
-
           <Card className="px-4 py-2">
             <div className="flex items-center gap-2">
-              <span className="text-yellow-600 text-2xl">💰</span>
-              <span className="font-bold text-xl">1000</span>
+              <Image src="/money.svg" alt="Monedas" width={60} height={60} />
+              <span className="font-bold text-xl">$1000</span>
             </div>
           </Card>
 
           <Link href="/savings-goal">
             <Card className="p-2 flex items-center gap-2 cursor-pointer">
-              <Star className="w-6 h-6 text-yellow-600" />
-              <span className="font-bold">Meta de Ahorro</span>
+              <Image src="/metas.svg" alt="Metas" width={60} height={60} />
+              <span className="font-bold">Metas</span>
             </Card>
           </Link>
         </CardContent>
@@ -70,26 +49,52 @@ export default function DragonPage() {
 
       {/* Footer */}
       <footer className="w-full shadow-md py-4">
-        <div className="flex justify-center gap-4 max-w-4xl mx-auto">
-          <Link href="/expenses">
-            <Button
-              variant="outline"
-              size="lg"
-              className="flex items-center gap-2"
-            >
-              <Gamepad2 className="w-5 h-5" />
-              Gastos
-            </Button>
-          </Link>
+        <div className="flex justify-center gap-8 max-w-4xl mx-auto">
           <Link href="/games">
-            <Button
-              variant="outline"
-              size="lg"
-              className="flex items-center gap-2"
-            >
-              <Gamepad2 className="w-5 h-5" />
-              Juegos
-            </Button>
+            <div className="cursor-pointer">
+              <Image
+                src="/game.svg"
+                alt="Juegos"
+                width={140}
+                height={140}
+                className="hover:scale-110 transition-transform"
+              />
+            </div>
+          </Link>
+
+          <Link href="/missions">
+            <div className="cursor-pointer">
+              <Image
+                src="/misiones.svg"
+                alt="Misiones"
+                width={140}
+                height={140}
+                className="hover:scale-110 transition-transform"
+              />
+            </div>
+          </Link>
+
+          <Link href="/farm">
+            <div className="cursor-pointer">
+              <Image
+                src="/granja.svg"
+                alt="Granja"
+                width={140}
+                height={140}
+                className="hover:scale-110 transition-transform"
+              />
+            </div>
+          </Link>
+          <Link href="/expenses">
+            <div className="cursor-pointer">
+              <Image
+                src="/gastos.svg"
+                alt="Gastos"
+                width={140}
+                height={140}
+                className="hover:scale-110 transition-transform"
+              />
+            </div>
           </Link>
         </div>
       </footer>
