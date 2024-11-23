@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader, Mic } from "lucide-react";
-import { postAI } from "@/api/postAI";
+import { askAI } from "@/api/postAI";
 
 export default function VoiceAssistant() {
   const [isListening, setIsListening] = useState(false);
@@ -12,6 +12,7 @@ export default function VoiceAssistant() {
     setResponse(null);
     setIsListening(true);
 
+    // Check if the browser supports Web Speech API
     if (!("webkitSpeechRecognition" in window)) {
       alert("Tu navegador no soporta reconocimiento de voz.");
       setIsListening(false);
@@ -30,7 +31,9 @@ export default function VoiceAssistant() {
 
       try {
         setIsLoading(true);
-        const aiResponse = await postAI(userQuestion);
+
+        const aiResponse = await askAI(userQuestion);
+
         setResponse(aiResponse);
       } catch (error) {
         console.error("Error fetching AI response:", error);
