@@ -3,6 +3,15 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface FallingObject {
   x: number;
@@ -19,7 +28,7 @@ export default function CoinCatcherGame() {
   const scoreRef = useRef(0);
   const playerX = useRef<number>(0);
   const objects = useRef<FallingObject[]>([]);
-  const gameOver = useRef<boolean>(false);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -69,18 +78,28 @@ export default function CoinCatcherGame() {
 
     const spawnObject = () => {
       const type = Math.random() < 0.7 ? "coin" : "bomb";
-      const size = canvas.width * 0.05;
+      const size = canvas.width * 0.08;
       const x = Math.random() * (canvas.width - size);
       objects.current.push({ x, y: -size, width: size, height: size, type });
     };
 
+    const coinImage = new Image();
+    coinImage.src = "/coin.webp";
+
+    const bombImage = new Image();
+    bombImage.src = "/bomb.webp";
+
+    const playerImage = new Image();
+    playerImage.src = "/2.png";
+
     const gameLoop = () => {
-      if (gameOver.current) return;
+      if (gameOver) return;
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      context.fillStyle = "#0000FF";
-      context.fillRect(
+      // Draw player
+      context.drawImage(
+        playerImage,
         playerX.current,
         playerY(),
         playerWidth(),
@@ -91,21 +110,11 @@ export default function CoinCatcherGame() {
         const obj = objects.current[i];
         obj.y += canvas.height * 0.005;
 
-        if (obj.type === "coin") {
-          context.fillStyle = "#FFFF00";
-        } else {
-          context.fillStyle = "#FF0000";
-        }
-        context.beginPath();
-        context.arc(
-          obj.x + obj.width / 2,
-          obj.y + obj.height / 2,
-          obj.width / 2,
-          0,
-          Math.PI * 2
-        );
-        context.fill();
+        // Draw objects
+        const image = obj.type === "coin" ? coinImage : bombImage;
+        context.drawImage(image, obj.x, obj.y, obj.width, obj.height);
 
+        // Collision detection
         if (
           obj.x < playerX.current + playerWidth() &&
           obj.x + obj.width > playerX.current &&
@@ -116,26 +125,26 @@ export default function CoinCatcherGame() {
             scoreRef.current += 1;
             setScore(scoreRef.current);
           } else {
-            gameOver.current = true;
-            alert(`Game Over! Your score: ${scoreRef.current}`);
-            resetGame();
-            return;
+            setGameOver(true);
           }
           objects.current.splice(i, 1);
           i--;
           continue;
         }
 
+        // Remove objects that are off-screen
         if (obj.y > canvas.height) {
           objects.current.splice(i, 1);
           i--;
         }
       }
 
+      // Draw score
       context.fillStyle = "#000000";
       context.font = `${canvas.width * 0.03}px Arial`;
-      context.fillText(`Score: ${scoreRef.current}`, 10, 30);
+      context.fillText(`Puntaje: ${scoreRef.current}`, 10, 30);
 
+      // Spawn new objects
       if (Math.random() < 0.02) {
         spawnObject();
       }
@@ -151,7 +160,7 @@ export default function CoinCatcherGame() {
       canvas.removeEventListener("touchmove", handleTouchMove);
       cancelAnimationFrame(animationFrameId.current!);
     };
-  }, []);
+  }, [gameOver]);
 
   const resetGame = () => {
     objects.current = [];
@@ -161,21 +170,37 @@ export default function CoinCatcherGame() {
     }
     scoreRef.current = 0;
     setScore(0);
-    gameOver.current = false;
-    if (animationFrameId.current) {
-      cancelAnimationFrame(animationFrameId.current);
-    }
-    animationFrameId.current = requestAnimationFrame(gameLoop);
+    setGameOver(false);
   };
-
-  function gameLoop() {
-    // This function is intentionally left empty. It will be overridden in useEffect.
-  }
 
   return (
     <div className="flex flex-col items-center">
       <canvas ref={canvasRef} className="border" />
-      <p className="text-center mt-4">Swipe or Use Arrow Keys to Move</p>
+      <p className="text-center mt-4">Desliza o usa las flechas para mover</p>
+
+      {/* Game Over Dialog */}
+      {gameOver && (
+        <AlertDialog open={gameOver} onOpenChange={setGameOver}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>¡Juego Terminado!</AlertDialogTitle>
+              <AlertDialogDescription>
+                Tu puntaje fue: {scoreRef.current}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction onClick={resetGame}>
+                Jugar de Nuevo
+              </AlertDialogAction>
+              <Link href="/games">
+                <Button variant="outline" className="ml-2">
+                  Volver a Juegos
+                </Button>
+              </Link>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
 
       {/* Buttons */}
       <div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
