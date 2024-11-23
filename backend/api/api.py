@@ -5,6 +5,8 @@ from api.routers.missions import router as missions_router
 from api.routers.allowances import router as allowances_router
 from api.routers.goals import router as goals_router
 from api.routers.transactions import router as transactions_router
+from api.routers.inventories import router as inventories_router
+from api.routers.items import router as items_router
 
 api = NinjaAPI(title="Hack api", version="1.0.0")
 api.add_router("/dragons", dragons_router)
@@ -12,6 +14,8 @@ api.add_router("/missions", missions_router)
 api.add_router("/allowances", allowances_router)
 api.add_router("/goals", goals_router)
 api.add_router("/transactions", transactions_router)
+api.add_router("/inventories", inventories_router)
+api.add_router("/items", items_router)
 
 
 @api.get("/status")

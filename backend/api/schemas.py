@@ -103,3 +103,25 @@ class TransactionSchema(Schema):
     amount: float
     description: str
     date: datetime
+
+
+# ----------------------- Items Schemas -----------------------
+
+class ItemSchema(Schema):
+    id: int
+    name: str
+    price: int
+    description: str
+
+
+# ----------------------- Inventories Schemas -----------------------
+
+class InventorySchema(Schema):
+    id: int
+    item: ItemSchema
+    quantity: int
+
+
+class CreateInventorySchema(Schema):
+    item_id: int
+    quantity: int

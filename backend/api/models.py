@@ -78,15 +78,9 @@ class Item(models.Model):
     Cada ítem tiene un tipo, precio, descripción y requisitos de desbloqueo.
     """
 
-    class ItemType(models.TextChoices):
-        CLOTHES = "clothes", "Ropa"
-        DRAGON_TYPE = "dragon_type", "Tipo de Dragón"
-
     name = models.CharField(max_length=255)  # Nombre del ítem
-    item_type = models.CharField(max_length=255, choices=ItemType.choices)  # Tipo del ítem
-    price = models.DecimalField(max_digits=10, decimal_places=2)  # Precio del ítem
+    price = models.IntegerField()  # Precio del ítem
     description = models.TextField()  # Descripción del ítem
-    unlock_requirements = models.TextField()  # Requisitos para desbloquear el ítem
 
     def __str__(self):
         return self.name
@@ -99,7 +93,7 @@ class Inventory(models.Model):
     """
 
     # user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="inventory")  # Propietario
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)  # Ítem en el inventario
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='inventories')  # Ítem en el inventario
     quantity = models.IntegerField(default=1)  # Cantidad del ítem
 
     # def __str__(self):

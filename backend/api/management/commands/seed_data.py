@@ -30,21 +30,38 @@ class Command(BaseCommand):
             experience_required=200
         )
 
-        # # Create Items
-        # item1 = Item.objects.create(
-        #     name='Dragon Armor',
-        #     item_type=Item.ItemType.CLOTHES,
-        #     price=Decimal('49.99'),
-        #     description='Protective armor for dragons.',
-        #     unlock_requirements='Reach level 5'
-        # )
+                # Create Items and Inventories
+        items_data = [
+            {
+                'name': 'Chupalla',
+                'price': 50,
+                'description': 'Chupalla de dragón.',
+                'quantity': 2
+            },
+            {
+                'name': 'Polera Platanus',
+                'price': 40,
+                'description': 'A wand with magical powers.',
+                'quantity': 1
+            },
+            {
+                'name': 'Chaqueta',
+                'price': 30,
+                'description': 'A shield to protect dragons.',
+                'quantity': 1
+            }
+        ]
 
-        # # Create Inventory
-        # inventory1 = Inventory.objects.create(
-        #     # user_profile=user2.profile,  # Uncomment if UserProfile is used
-        #     item=item1,
-        #     quantity=1
-        # )
+        for item_data in items_data:
+            item = Item.objects.create(
+                name=item_data['name'],
+                price=item_data['price'],
+                description=item_data['description'],
+            )
+            Inventory.objects.create(
+                item=item,
+                quantity=item_data['quantity']
+            )
 
         # Create Missions
         mission1 = Mission.objects.create(
