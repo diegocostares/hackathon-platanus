@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "tsc --noEmit && next build",
     "start": "next start",
-    "i18n": "i18nexus pull",
     "lint": "next lint"
   },
   "dependencies": {
