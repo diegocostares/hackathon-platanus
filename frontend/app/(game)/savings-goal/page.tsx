@@ -10,7 +10,7 @@ export default function SavingsGoalPage() {
       {/* Header */}
       <header className="w-full">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
-          <Link href="/home">
+          <Link href="/dragon">
             <Card className="p-2 cursor-pointer">
               <div className="flex items-center gap-2">
                 <Calendar className="w-6 h-6 text-blue-600" />
