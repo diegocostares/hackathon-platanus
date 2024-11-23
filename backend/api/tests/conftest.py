@@ -4,8 +4,8 @@ from ninja.testing import TestClient
 from ninja_jwt.tokens import RefreshToken
 
 from api.api import api
-from api.models import UserProfile
-from api.tests.factories.auth_factories import UserFactory
+# from api.models import UserProfile
+# from api.tests.factories.auth_factories import UserFactory
 
 
 @pytest.fixture(scope="session")
