@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function DragonPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-radial-sky">
+    <div className="min-h-screen flex flex-col ">
       {/* Header */}
       <header className="w-full">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
@@ -42,7 +42,7 @@ export default function DragonPage() {
           {/* Imagen de la mascota */}
           <div className="relative w-64 h-64">
             <Image
-              src="/1.png"
+              src="/2.png"
               alt="Mascota del juego"
               layout="fill"
               objectFit="contain"

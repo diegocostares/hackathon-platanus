@@ -71,7 +71,9 @@ export default function RootLayout({
         />
         <meta name="twitter:image" content="/assets/logo.svg" />
       </head>
-      <body className={`${GeistSans.className} antialiased`}>{children}</body>
+      <body className={`${GeistSans.className} antialiased bg-radial-sky`}>
+        {children}
+      </body>
     </html>
   );
 }
