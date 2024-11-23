@@ -29,6 +29,7 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 # TODO: django.core.mail.backends.smtp.EmailBackend
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@frostaway.com")
+OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
 # EMAIL_USE_TLS = True
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
