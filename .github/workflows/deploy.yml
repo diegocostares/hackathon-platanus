@@ -24,7 +24,7 @@ jobs:
       - name: Deploy on EC2
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
-            cd dhackathon-platanus
+            cd hackathon-platanus
             sudo docker-compose down
             sudo docker-compose up --build -d
           ENDSSH
