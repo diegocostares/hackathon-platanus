@@ -33,3 +33,14 @@ def delete_mission(request, mission_id: int):
     mission = get_object_or_404(Mission, id=mission_id)
     mission.delete()
     return 204
+
+
+@router.patch("/{mission_id}/switch-status", response=MissionSchema)
+def switch_mission_status(request, mission_id: int):
+    mission = get_object_or_404(Mission, id=mission_id)
+    if mission.status == 'pending':
+        mission.status = 'completed'
+    elif mission.status == 'completed':
+        mission.status = 'pending'
+    mission.save()
+    return mission

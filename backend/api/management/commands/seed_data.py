@@ -65,12 +65,26 @@ class Command(BaseCommand):
 
         # Create Missions
         mission1 = Mission.objects.create(
-            name='Collect 10 Fire Stones',
-            description='Gather 10 fire stones from the volcano.',
+            name='Hacer la cama',
+            description='Ordena y limpia tu cama al levantarte.',
             reward_type=Mission.RewardType.EXPERIENCE,
             reward_amount=50,
-            # assigned_by=user1.profile,  # Uncomment if UserProfile is used
-            # for_user=user2.profile,  # Uncomment if UserProfile is used
+            status=Mission.Status.COMPLETED
+        )
+
+        mission2 = Mission.objects.create(
+            name='Lavar los platos',
+            description='Lava los platos después de la comida.',
+            reward_type=Mission.RewardType.EXPERIENCE,
+            reward_amount=15,
+            status=Mission.Status.PENDING
+        )
+
+        mission3 = Mission.objects.create(
+            name='Sacar la basura',
+            description='Lleva la basura al contenedor más cercano.',
+            reward_type=Mission.RewardType.EXPERIENCE,
+            reward_amount=5,
             status=Mission.Status.PENDING
         )
 
