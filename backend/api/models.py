@@ -47,7 +47,7 @@ class Dragon(models.Model):
     """
 
     # user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="dragons")  # Propietario
-    dragon_type = models.ForeignKey(DragonType, on_delete=models.CASCADE)  # Tipo de dragón
+    dragon_type = models.ForeignKey(DragonType, on_delete=models.CASCADE, related_name="dragons")
     phase = models.IntegerField(default=1)  # Fase actual del dragón
     experience = models.IntegerField(default=0)  # Experiencia acumulada ESTE SI
 
@@ -55,14 +55,13 @@ class Dragon(models.Model):
     #     return f"Dragón de {self.user_profile.user.username}"
 
 
-# Revisar bien
 class EvolutionGoal(models.Model):
     """
     Define las metas de evolución para un tipo de dragón en una fase específica.
     Establece cuánta experiencia se necesita para alcanzar la siguiente fase.
     """
 
-    dragon_type = models.ForeignKey(DragonType, on_delete=models.CASCADE)  # Tipo de dragón al que aplica
+    dragon_type = models.ForeignKey(DragonType, on_delete=models.CASCADE, related_name="evolution_goals")
     phase = models.IntegerField()  # Fase de evolución
     experience_required = models.IntegerField()  # Experiencia requerida para esta fase
     # defined_by = models.ForeignKey(
@@ -186,6 +185,7 @@ class Transaction(models.Model):
 
 class Goals(models.Model):
     name = models.TextField()
-    money_amount = models.IntegerField()
+    reward = models.IntegerField()
     description = models.TextField()
-
+    unlocked = models.BooleanField(default=False)
+    image = models.CharField(max_length=255, default="")
