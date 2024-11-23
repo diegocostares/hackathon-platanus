@@ -9,7 +9,7 @@ export default function DragonPage() {
   return (
     <div className="min-h-screen flex flex-col bg-sky-100">
       {/* Header */}
-      <header className="w-full shadow-md">
+      <header className="w-full">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
           <Link href="/missions">
             <Card className="p-2 cursor-pointer">
@@ -42,7 +42,7 @@ export default function DragonPage() {
           {/* Imagen de la mascota */}
           <div className="relative w-64 h-64">
             <Image
-              src="/dragon.png"
+              src="/1.png"
               alt="Mascota del juego"
               layout="fill"
               objectFit="contain"
