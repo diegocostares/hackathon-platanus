@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Environment variables
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-y51490ks^)m(0^y$t6*%%9v(o!2uaps#8wk%@cbz%l$bgwroj8")
-DEBUG = os.getenv("DEBUG", "False").lower() in ["true", "1"]
+DEBUG = True
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
 # Email Backend

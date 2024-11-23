@@ -75,8 +75,18 @@ class Command(BaseCommand):
         # Create Goals
         goal1 = Goals.objects.create(
             name='Save for a new bike',
-            money_amount=100,
-            description='Save money to buy a new bike.'
+            reward=100,
+            description='Save money to buy a new bike.',
+            unlocked=True,
+            image='image1'
+        )
+
+        goal2 = Goals.objects.create(
+            name='Save for a new ball',
+            reward=150,
+            description='Save money to buy a new ball.',
+            unlocked=False,
+            image='image2'
         )
 
         self.stdout.write(self.style.SUCCESS('Database seeded successfully.'))
