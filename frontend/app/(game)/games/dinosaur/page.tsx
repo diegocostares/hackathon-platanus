@@ -1,4 +1,4 @@
-import DinosaurGame from "@/app/components/DinosaurGame";
+import DinosaurGame from "./_component/DinosaurGame";
 
 export default function DinosaurGamePage() {
   return (

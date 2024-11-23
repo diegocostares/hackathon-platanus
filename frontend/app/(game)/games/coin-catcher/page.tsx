@@ -1,4 +1,4 @@
-import CoinCatcherGame from "@/app/components/CoinCatcherGame";
+import CoinCatcherGame from "./_component/CoinCatcherGame";
 
 export default function CoinCatcherPage() {
   return (

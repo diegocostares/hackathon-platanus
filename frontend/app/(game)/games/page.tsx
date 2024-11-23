@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import DinosaurGame from "@/app/components/DinosaurGame";
-import CoinCatcherGame from "@/app/components/CoinCatcherGame";
 
 export default function GamesPage() {
   return (
@@ -22,7 +20,12 @@ export default function GamesPage() {
             <p>Corre y salta para evitar obstáculos.</p>
           </Card>
         </Link>
-        {/* Puedes agregar más juegos aquí */}
+        <Link href="/games/flappy_dragon">
+          <Card className="p-4 cursor-pointer">
+            <h2 className="text-xl font-bold mb-2">Flappy Dragon</h2>
+            <p>¡Atrapa monedas y evita obstáculos!</p>
+          </Card>
+        </Link>
       </div>
     </div>
   );
