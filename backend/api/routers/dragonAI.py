@@ -4,7 +4,7 @@ from ninja import Router
 
 router = Router(tags=["DragonVoice"])
 
-@router.get("/", response=str)
+@router.post("/", response=str)
 def generate_openai_response(request, question:str):
     prompt = [
         {
