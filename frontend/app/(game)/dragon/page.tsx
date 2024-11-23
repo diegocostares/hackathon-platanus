@@ -11,14 +11,24 @@ export default function DragonPage() {
       {/* Header */}
       <header className="w-full shadow-md">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
-          <Link href="/missions">
+          {/* <Link href="/missions">
             <Card className="p-2 cursor-pointer">
               <div className="flex items-center gap-2">
                 <Trophy className="w-6 h-6 text-green-600" />
                 <span className="font-bold">Misiones Diarias</span>
               </div>
             </Card>
-          </Link>
+          </Link> */}
+          {/* <div>
+            <Link href="./">
+              <Image
+                src="/mascotIcon.png"
+                alt="Mascotas"
+                layout="fill"
+                objectFit="contain"
+              />
+            </Link>
+          </div> */}
 
           <Card className="px-4 py-2">
             <div className="flex items-center gap-2">
@@ -52,7 +62,7 @@ export default function DragonPage() {
           <div className="w-full max-w-md">
             <Progress value={33} className="h-4" />
             <p className="text-center mt-2 text-sm text-gray-700">
-              Experiencia
+              40.000 EXP / 12.000 EXP
             </p>
           </div>
         </div>
