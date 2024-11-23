@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { Leaf, Trophy, Gamepad2, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function GameInterface() {
@@ -53,14 +54,18 @@ export default function GameInterface() {
       {/* Footer */}
       <footer className="w-full shadow-md py-4">
         <div className="flex justify-center gap-4 max-w-4xl mx-auto">
-          <Button
-            variant="outline"
-            size="lg"
-            className="flex items-center gap-2"
-          >
-            <Gamepad2 className="w-5 h-5" />
-            Juegos
-          </Button>
+          <Link href="/juegos">
+            {" "}
+            {/* Wrap the Button with Link */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="flex items-center gap-2"
+            >
+              <Gamepad2 className="w-5 h-5" />
+              Juegos
+            </Button>
+          </Link>
           <Button
             variant="outline"
             size="lg"
