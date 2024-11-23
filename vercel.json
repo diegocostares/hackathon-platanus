@@ -1,9 +1,0 @@
-{
-  "projects": {
-    "rootDirectory": "frontend"
-  },
-  "build": {
-    "command": "npm run build",
-    "outputDirectory": "frontend/.next"
-  }
-}
