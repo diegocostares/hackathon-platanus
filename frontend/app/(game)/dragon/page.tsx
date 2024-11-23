@@ -2,6 +2,7 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import BtnSaldo from "@/components/btnSaldo";
 
 export default function DragonPage() {
   return (
@@ -9,12 +10,7 @@ export default function DragonPage() {
       {/* Header */}
       <header className="w-full">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
-          <Card className="px-4 py-2">
-            <div className="flex items-center gap-2">
-              <Image src="/money.svg" alt="Monedas" width={60} height={60} />
-              <span className="font-bold text-xl">$1000</span>
-            </div>
-          </Card>
+          <BtnSaldo />
 
           <Link href="/savings-goal">
             <Card className="p-2 flex items-center gap-2 cursor-pointer">
@@ -49,51 +45,69 @@ export default function DragonPage() {
 
       {/* Footer */}
       <footer className="w-full shadow-md py-4">
-        <div className="flex justify-center gap-8 max-w-4xl mx-auto">
+        <div className="flex justify-center gap-12 max-w-4xl mx-auto">
+          <Link href="/dragon">
+            <div className="cursor-pointer flex flex-col items-center">
+              <Image
+                src="/home.svg"
+                alt="Mi Dragon"
+                width={140}
+                height={140}
+                className="hover:scale-110 transition-transform mb-2"
+              />
+              <span className="text-sm font-medium">Mi Dragon</span>
+            </div>
+          </Link>
+
           <Link href="/games">
-            <div className="cursor-pointer">
+            <div className="cursor-pointer flex flex-col items-center">
               <Image
                 src="/game.svg"
                 alt="Juegos"
                 width={140}
                 height={140}
-                className="hover:scale-110 transition-transform"
+                className="hover:scale-110 transition-transform mb-2"
               />
+              <span className="text-sm font-medium">Juegos</span>
             </div>
           </Link>
 
           <Link href="/missions">
-            <div className="cursor-pointer">
+            <div className="cursor-pointer flex flex-col items-center">
               <Image
                 src="/misiones.svg"
                 alt="Misiones"
                 width={140}
                 height={140}
-                className="hover:scale-110 transition-transform"
+                className="hover:scale-110 transition-transform mb-2"
               />
+              <span className="text-sm font-medium">Misiones</span>
             </div>
           </Link>
 
           <Link href="/farm">
-            <div className="cursor-pointer">
+            <div className="cursor-pointer flex flex-col items-center">
               <Image
                 src="/granja.svg"
                 alt="Granja"
                 width={140}
                 height={140}
-                className="hover:scale-110 transition-transform"
+                className="hover:scale-110 transition-transform mb-2"
               />
+              <span className="text-sm font-medium">Granja</span>
             </div>
           </Link>
+
           <Link href="/expenses">
-            <div className="cursor-pointer">
+            <div className="cursor-pointer flex flex-col items-center">
               <Image
                 src="/gastos.svg"
                 alt="Gastos"
                 width={140}
                 height={140}
-                className="hover:scale-110 transition-transform"
+                className="hover:scale-110 transition-transform mb-2"
               />
+              <span className="text-sm font-medium">Gastos</span>
             </div>
           </Link>
         </div>
