@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -19,7 +21,6 @@ export default function SavingGoalsPage() {
       unlocked: false,
       name: "Dragón de Hielo Nivel 1",
     },
-    // Agregar más huevos aquí según sea necesario
   ];
 
   const goals = [
@@ -53,7 +54,10 @@ export default function SavingGoalsPage() {
     <div className="relative w-full max-w-xl mb-8">
       <div className="flex flex-col space-y-12">
         {goals.map((goal) => (
-          <div key={goal.id} className="flex items-center">
+          <div
+            key={goal.id}
+            className="flex items-center group transition-all duration-200 hover:-translate-y-2"
+          >
             {/* Icono */}
             <div className="w-16 h-16 flex-shrink-0 relative z-10">
               <Image
@@ -61,7 +65,7 @@ export default function SavingGoalsPage() {
                 alt={goal.name}
                 width={64}
                 height={64}
-                className={`rounded-full ${
+                className={`rounded-full transform transition-transform duration-300 group-hover:scale-110 ${
                   goal.unlocked ? "border-green-500" : "border-gray-400"
                 } border-4`}
               />
@@ -71,12 +75,21 @@ export default function SavingGoalsPage() {
             <div className="relative flex-grow pl-8">
               <div className="absolute top-0 left-7 w-1 bg-gray-400 h-full"></div>
               <div className="relative ml-4">
-                <h3 className="font-bold text-lg text-gray-800">{goal.name}</h3>
-                <p className="text-sm text-gray-700">{goal.description}</p>
+                <h3 className="font-bold text-lg text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                  {goal.name}
+                </h3>
+                <p className="text-sm text-gray-700 group-hover:text-gray-800 transition-colors duration-300">
+                  {goal.description}
+                </p>
                 <p className="text-xs text-gray-500 mt-1">
                   Recompensa: {goal.reward}
                 </p>
-                {!goal.unlocked && <Progress value={50} className="mt-2 h-2" />}
+                {!goal.unlocked && (
+                  <Progress
+                    value={50}
+                    className="mt-2 h-2 group-hover:bg-blue-200"
+                  />
+                )}
               </div>
             </div>
           </div>

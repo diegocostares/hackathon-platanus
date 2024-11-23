@@ -88,25 +88,29 @@ export default function Tasks() {
         {tasks.map((task) => (
           <div
             key={task.id}
-            className={`flex justify-between items-start border p-4 rounded-md shadow-sm ${
+            className={`flex justify-between items-start border p-4 rounded-md shadow-sm transition-shadow ${
               task.status === "completed"
                 ? "bg-green-50 line-through"
                 : "bg-white"
-            }`}
+            } hover:shadow-md`}
           >
-            <div>
-              <h3 className="font-bold text-lg text-gray-800">{task.name}</h3>
-              <p className="text-sm text-gray-600">{task.description}</p>
-              <p className="text-xs text-gray-500 mt-1">
+            <div className="transition-all duration-200 group">
+              <h3 className="font-bold text-lg text-gray-800 group-hover:text-blue-600">
+                {task.name}
+              </h3>
+              <p className="text-sm text-gray-600 group-hover:text-gray-800">
+                {task.description}
+              </p>
+              <p className="text-xs text-gray-500 mt-1 group-hover:text-gray-700">
                 Recompensa: ${task.reward_amount}
               </p>
             </div>
             <button
               onClick={() => handleToggleStatus(task.id)}
-              className={`px-4 py-2 text-sm font-semibold rounded-md ${
+              className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors duration-200 ${
                 task.status === "completed"
-                  ? "bg-gray-300 text-gray-700"
-                  : "bg-blue-500 text-white"
+                  ? "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
               }`}
             >
               {task.status === "completed" ? "Deshacer" : "Completar"}
@@ -117,7 +121,7 @@ export default function Tasks() {
 
       {totalReward === maxReward && (
         <div className="mt-8 text-center">
-          <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
+          <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4 animate-pulse" />
           <h2 className="text-2xl font-bold text-green-600">
             ¡Felicidades! Has completado todas las tareas del día.
           </h2>
