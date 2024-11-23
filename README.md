@@ -1,2 +1,4 @@
-# hackathon-platanus
-hackathon de Platanus
+# Little Dragon Game
+
+Juego interactivo creado para la hackathon de Platanus.
+
