@@ -37,9 +37,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="./logo.svg" type="image/svg+xml" />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
@@ -56,7 +56,7 @@ export default function RootLayout({
         />
         <meta
           property="og:description"
-          content="Un juego educativo para aprender sobre finanzas personales"
+          content="Un juego educativo para aprender sobre finanzas personales jugando con dragones"
         />
         <meta property="og:image" content="/assets/logo.svg" />
         <meta property="og:locale" content="es_ES" />
