@@ -12,7 +12,10 @@ export default function GameInterface() {
       <header className="w-fullshadow-md">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
           <Card className="p-2">
-            <Leaf className="w-6 h-6 text-green-600" />
+            <div className="flex items-center gap-2">
+              <Trophy className="w-6 h-6 text-green-600" />
+              <span className="font-bold">Misiones diarias</span>
+            </div>
           </Card>
 
           <Card className="px-4 py-2">
@@ -24,7 +27,7 @@ export default function GameInterface() {
 
           <Card className="p-2 flex items-center gap-2">
             <Trophy className="w-6 h-6 text-yellow-600" />
-            <span className="font-bold">Meta</span>
+            <span className="font-bold">Meta de ahorro</span>
           </Card>
         </CardContent>
       </header>
@@ -54,25 +57,21 @@ export default function GameInterface() {
       {/* Footer */}
       <footer className="w-full shadow-md py-4">
         <div className="flex justify-center gap-4 max-w-4xl mx-auto">
-          <Link href="/juegos">
-            {" "}
-            {/* Wrap the Button with Link */}
-            <Button
-              variant="outline"
-              size="lg"
-              className="flex items-center gap-2"
-            >
-              <Gamepad2 className="w-5 h-5" />
-              Juegos
-            </Button>
-          </Link>
           <Button
             variant="outline"
             size="lg"
             className="flex items-center gap-2"
           >
             <ShoppingCart className="w-5 h-5" />
-            Compras
+            Gastos
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="flex items-center gap-2"
+          >
+            <Gamepad2 className="w-5 h-5" />
+            Juegos
           </Button>
         </div>
       </footer>
