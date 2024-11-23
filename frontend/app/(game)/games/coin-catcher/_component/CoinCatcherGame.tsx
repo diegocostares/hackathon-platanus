@@ -29,6 +29,8 @@ export default function CoinCatcherGame() {
   const playerX = useRef<number>(0);
   const objects = useRef<FallingObject[]>([]);
   const [gameOver, setGameOver] = useState(false);
+  const keysPressed = useRef<{ [key: string]: boolean }>({});
+  const mouseHeld = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -37,30 +39,58 @@ export default function CoinCatcherGame() {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    // Resize canvas and adjust game elements
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth * 0.9;
-      canvas.height = window.innerHeight * 0.6;
+      canvas.width = 400;
+      canvas.height = 700;
       playerX.current = (canvas.width - playerWidth()) / 2; // Center player
     };
 
-    const playerWidth = () => canvas.width * 0.1;
-    const playerHeight = () => canvas.height * 0.1;
-    const playerY = () => canvas.height - playerHeight() - 10;
+    const playerWidth = () => 60;
+    const playerHeight = () => 60;
+    const playerY = () => canvas.height - playerHeight() - 20;
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const moveDistance = canvas.width * 0.05;
-      if (e.code === "ArrowLeft") {
+    const movePlayer = () => {
+      const moveDistance = 5;
+      if (keysPressed.current["ArrowLeft"]) {
         playerX.current -= moveDistance;
         if (playerX.current < 0) playerX.current = 0;
-      } else if (e.code === "ArrowRight") {
+      }
+      if (keysPressed.current["ArrowRight"]) {
         playerX.current += moveDistance;
         if (playerX.current + playerWidth() > canvas.width)
           playerX.current = canvas.width - playerWidth();
       }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      keysPressed.current[e.code] = true;
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      keysPressed.current[e.code] = false;
+    };
+
+    const handleMouseDown = () => {
+      mouseHeld.current = true;
+    };
+
+    const handleMouseUp = () => {
+      mouseHeld.current = false;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!mouseHeld.current) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      playerX.current = mouseX - playerWidth() / 2;
+
+      if (playerX.current < 0) playerX.current = 0;
+      if (playerX.current + playerWidth() > canvas.width)
+        playerX.current = canvas.width - playerWidth();
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -74,11 +104,15 @@ export default function CoinCatcherGame() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    canvas.addEventListener("mousedown", handleMouseDown);
+    canvas.addEventListener("mouseup", handleMouseUp);
+    canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("touchmove", handleTouchMove);
 
     const spawnObject = () => {
       const type = Math.random() < 0.7 ? "coin" : "bomb";
-      const size = canvas.width * 0.08;
+      const size = 40;
       const x = Math.random() * (canvas.width - size);
       objects.current.push({ x, y: -size, width: size, height: size, type });
     };
@@ -95,6 +129,8 @@ export default function CoinCatcherGame() {
     const gameLoop = () => {
       if (gameOver) return;
 
+      movePlayer();
+
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw player
@@ -108,7 +144,7 @@ export default function CoinCatcherGame() {
 
       for (let i = 0; i < objects.current.length; i++) {
         const obj = objects.current[i];
-        obj.y += canvas.height * 0.005;
+        obj.y += 3;
 
         // Draw objects
         const image = obj.type === "coin" ? coinImage : bombImage;
@@ -141,7 +177,7 @@ export default function CoinCatcherGame() {
 
       // Draw score
       context.fillStyle = "#000000";
-      context.font = `${canvas.width * 0.03}px Arial`;
+      context.font = "20px Arial";
       context.fillText(`Puntaje: ${scoreRef.current}`, 10, 30);
 
       // Spawn new objects
@@ -157,6 +193,10 @@ export default function CoinCatcherGame() {
     return () => {
       window.removeEventListener("resize", resizeCanvas);
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      canvas.removeEventListener("mousedown", handleMouseDown);
+      canvas.removeEventListener("mouseup", handleMouseUp);
+      canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("touchmove", handleTouchMove);
       cancelAnimationFrame(animationFrameId.current!);
     };
@@ -166,7 +206,7 @@ export default function CoinCatcherGame() {
     objects.current = [];
     const canvas = canvasRef.current;
     if (canvas) {
-      playerX.current = (canvas.width - canvas.width * 0.1) / 2;
+      playerX.current = (canvas.width - 60) / 2;
     }
     scoreRef.current = 0;
     setScore(0);
@@ -175,25 +215,38 @@ export default function CoinCatcherGame() {
 
   return (
     <div className="flex flex-col items-center">
-      <canvas ref={canvasRef} className="border" />
-      <p className="text-center mt-4">Desliza o usa las flechas para mover</p>
+      <canvas
+        ref={canvasRef}
+        className="border border-gray-400 rounded-md"
+        style={{ width: "400px", height: "700px" }}
+      />
+      <p className="text-center mt-4 text-sm text-gray-600">
+        Desliza, haz clic o mantén presionado para mover
+      </p>
 
       {/* Game Over Dialog */}
       {gameOver && (
         <AlertDialog open={gameOver} onOpenChange={setGameOver}>
-          <AlertDialogContent>
+          <AlertDialogContent className="max-w-md p-8">
             <AlertDialogHeader>
-              <AlertDialogTitle>¡Juego Terminado!</AlertDialogTitle>
-              <AlertDialogDescription>
-                Tu puntaje fue: {scoreRef.current}
+              <AlertDialogTitle className="text-3xl font-bold">
+                ¡Juego Terminado!
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-lg mt-4">
+                Tu puntaje fue:{" "}
+                <span className="font-bold">{scoreRef.current}</span>
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogAction onClick={resetGame}>
+            <AlertDialogFooter className="mt-6 flex flex-col gap-4">
+              <Button
+                size="lg"
+                onClick={resetGame}
+                className="bg-blue-500 hover:bg-blue-600 w-full"
+              >
                 Jugar de Nuevo
-              </AlertDialogAction>
+              </Button>
               <Link href="/games">
-                <Button variant="outline" className="ml-2">
+                <Button size="lg" variant="outline" className="w-full">
                   Volver a Juegos
                 </Button>
               </Link>
