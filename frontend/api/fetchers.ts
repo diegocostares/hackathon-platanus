@@ -19,3 +19,24 @@ export async function getFetcher(url, headers) {
     throw error;
   }
 }
+
+export async function postFetcher(url, headers, body) {
+  try {
+    const apiUrl = `${API_BASE_URL}${url}`;
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("POST request failed:", errorData);
+      throw new Error("POST request failed!");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
