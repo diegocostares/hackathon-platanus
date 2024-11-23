@@ -6,12 +6,6 @@ import Link from "next/link";
 
 export default function SavingsGoalPage() {
   return (
-<<<<<<< Updated upstream
-    <div className="min-h-screen bg-radial-sky p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">Meta de Ahorro</h1>
-      <p className="text-center">Establece y sigue tu meta de ahorro.</p>
-      {/* Aquí puedes agregar funcionalidad para establecer y visualizar la meta */}
-=======
     <div className="min-h-screen flex flex-col bg-sky-100">
       {/* Header */}
       <header className="w-full">
@@ -90,7 +84,6 @@ export default function SavingsGoalPage() {
         <div className="flex justify-center gap-4 max-w-4xl mx-auto">
         </div>
       </footer>
->>>>>>> Stashed changes
     </div>
   );
 }
