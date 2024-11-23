@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import BtnSaldo from "@/components/btnSaldo";
+import VoiceAssistant from "@/components/dragonVoice";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +13,7 @@ export default function DragonPage() {
     { name: "Chocolate", price: 1500 },
     { name: "Pasaje Micro", price: 500 },
   ]);
+
 
   return (
     <>
@@ -22,7 +24,11 @@ export default function DragonPage() {
             <BtnSaldo />
           </CardContent>
         </div>
+        <div>
+          <VoiceAssistant />
+        </div>
       </header>
+
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-center items-center px-4">
