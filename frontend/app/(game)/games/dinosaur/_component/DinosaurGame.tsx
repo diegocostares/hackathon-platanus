@@ -6,37 +6,57 @@ export default function DinosaurGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number>();
 
-  // Game state variables
   const dinoY = useRef<number>(0);
   const dinoVelocity = useRef<number>(0);
-  const obstacleX = useRef<number>(800);
+  const obstacleX = useRef<number>(0);
   const gameOver = useRef<boolean>(false);
 
   const gravity = 0.5;
   const jumpStrength = 12;
-  const gameSpeed = 5;
+  const gameSpeed = useRef<number>(5);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d");
-    if (!context || !canvas) return;
+    if (!canvas) return;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth * 0.9;
+      canvas.height = window.innerHeight * 0.6;
+      obstacleX.current = canvas.width + Math.random() * 500 + 100;
+    };
+
+    resizeCanvas();
+
+    window.addEventListener("resize", resizeCanvas);
 
     const groundY = canvas.height - 50;
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (
-        (e.code === "Space" || e.code === "ArrowUp") &&
-        dinoY.current === 0 &&
-        !gameOver.current
-      ) {
+    const handleJump = () => {
+      if (dinoY.current === 0 && !gameOver.current) {
         dinoVelocity.current = jumpStrength;
       }
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space" || e.code === "ArrowUp") {
+        handleJump();
+      }
+    };
+
+    const handleTouchStart = () => {
+      handleJump();
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("touchstart", handleTouchStart);
 
     const gameLoop = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
+
+      gameSpeed.current = canvas.width / 160;
 
       context.fillStyle = "#808080";
       context.fillRect(0, groundY, canvas.width, 50);
@@ -50,20 +70,20 @@ export default function DinosaurGame() {
       }
 
       context.fillStyle = "#000000";
-      const dinoWidth = 50;
-      const dinoHeight = 50;
+      const dinoWidth = canvas.width * 0.06;
+      const dinoHeight = canvas.height * 0.15;
       context.fillRect(
-        50,
+        canvas.width * 0.1,
         groundY - dinoHeight - dinoY.current,
         dinoWidth,
         dinoHeight
       );
 
-      obstacleX.current -= gameSpeed;
+      obstacleX.current -= gameSpeed.current;
 
       context.fillStyle = "#FF0000";
-      const obstacleWidth = 20;
-      const obstacleHeight = 30;
+      const obstacleWidth = canvas.width * 0.04;
+      const obstacleHeight = canvas.height * 0.1;
       context.fillRect(
         obstacleX.current,
         groundY - obstacleHeight,
@@ -72,7 +92,7 @@ export default function DinosaurGame() {
       );
 
       const dinoRect = {
-        x: 50,
+        x: canvas.width * 0.1,
         y: groundY - dinoHeight - dinoY.current,
         width: dinoWidth,
         height: dinoHeight,
@@ -102,7 +122,9 @@ export default function DinosaurGame() {
     animationFrameId.current = requestAnimationFrame(gameLoop);
 
     return () => {
+      window.removeEventListener("resize", resizeCanvas);
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("touchstart", handleTouchStart);
       cancelAnimationFrame(animationFrameId.current!);
     };
   }, []);
@@ -120,26 +142,28 @@ export default function DinosaurGame() {
   };
 
   const resetGame = () => {
-    dinoY.current = 0;
-    dinoVelocity.current = 0;
-    obstacleX.current = 800;
-    gameOver.current = false;
-    const context = canvasRef.current?.getContext("2d");
-    if (context) {
-      animationFrameId.current = requestAnimationFrame(() => {
-        setTimeout(() => {
-          if (!gameOver.current) {
-            animationFrameId.current = requestAnimationFrame(() => {});
-          }
-        }, 100);
-      });
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const groundY = canvas.height - 50;
+      dinoY.current = 0;
+      dinoVelocity.current = 0;
+      obstacleX.current = canvas.width + Math.random() * 500 + 100;
+      gameOver.current = false;
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+      animationFrameId.current = requestAnimationFrame(gameLoop);
+    }
+
+    function gameLoop() {
+      // Restart the game loop after resetting
     }
   };
 
   return (
     <div className="flex flex-col items-center">
-      <canvas ref={canvasRef} width={800} height={400} className="border" />
-      <p className="text-center mt-4">Press Space or Up Arrow to Jump</p>
+      <canvas ref={canvasRef} className="border" />
+      <p className="text-center mt-4">Tap or Press Space/Up Arrow to Jump</p>
     </div>
   );
 }
