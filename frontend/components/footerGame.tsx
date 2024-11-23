@@ -84,7 +84,7 @@ export default function FooterGame() {
         </Link>
 
         {/* Enlace Granja */}
-        <Link href="/farm">
+        <Link href="/goals">
           <div
             className={cn(
               "cursor-pointer flex flex-col items-center transition-all",
