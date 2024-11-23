@@ -50,7 +50,7 @@ export default function GameLayout({
             </div>
           </Link>
 
-          <Link href="/farm">
+          <Link href="/goals">
             <div className="cursor-pointer flex flex-col items-center">
               <Image
                 src="/granja.svg"
