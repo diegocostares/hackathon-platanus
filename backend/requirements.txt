@@ -16,3 +16,4 @@ python-dotenv
 pytz
 redis
 twilio
+openai
