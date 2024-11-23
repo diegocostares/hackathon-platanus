@@ -5,10 +5,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import DinosaurGame from "@/app/components/DinosaurGame";
 import CoinCatcherGame from "@/app/components/CoinCatcherGame";
+import FlappyBirdGame from "@/app/components/FlappyBirdGame";
 
 export default function JuegosPage() {
   const [selectedGame, setSelectedGame] = useState<
-    "dinosaur" | "coinCatcher" | null
+    "dinosaur" | "coinCatcher" | "flappyBird" | null
   >(null);
 
   return (
@@ -34,6 +35,9 @@ export default function JuegosPage() {
             <Button onClick={() => setSelectedGame("coinCatcher")}>
               Coin Catcher
             </Button>
+            <Button onClick={() => setSelectedGame("flappyBird")}>
+              Flappy Bird
+            </Button>
           </div>
         )}
         {selectedGame === "dinosaur" && (
@@ -58,6 +62,18 @@ export default function JuegosPage() {
               Volver a la selección de juegos
             </Button>
             <CoinCatcherGame />
+          </div>
+        )}
+        {selectedGame === "flappyBird" && (
+          <div>
+            <Button
+              onClick={() => setSelectedGame(null)}
+              variant="outline"
+              className="mb-4"
+            >
+              Volver a la selección de juegos
+            </Button>
+            <FlappyBirdGame />
           </div>
         )}
       </main>
