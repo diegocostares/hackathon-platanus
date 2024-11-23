@@ -14,7 +14,6 @@ export default function DragonPage() {
     { name: "Pasaje Micro", price: 500 },
   ]);
 
-
   return (
     <>
       {/* Header */}
@@ -28,7 +27,6 @@ export default function DragonPage() {
           <VoiceAssistant />
         </div>
       </header>
-
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-center items-center px-4">
@@ -146,6 +144,7 @@ export default function DragonPage() {
           </div>
 
           {/* List of Purchased Items */}
+          <h2 className="text-2xl font-bold">Ultimos gastos</h2>
           <ul className="list-none mb-40">
             {items.map((item, index) => (
               <li key={index} className="flex flex-wrap">

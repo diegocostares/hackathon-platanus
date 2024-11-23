@@ -59,7 +59,7 @@ export default function VoiceAssistant() {
         variant="outline"
         size="lg"
         onClick={handleVoiceInput}
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 mb-4"
         disabled={isListening || isLoading}
       >
         <Mic className="w-6 h-6" />
