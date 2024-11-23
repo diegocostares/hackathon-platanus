@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 
 export default function GamesPage() {
   return (
-    <div className="min-h-screen bg-radial-sky p-4">
+    <div className="min-h-screen  p-4">
       <h1 className="text-2xl font-bold mb-6 text-center">Juegos</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
         <Link href="/games/coin-catcher">

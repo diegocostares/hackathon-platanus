@@ -1,21 +1,37 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { User, UserCircle } from "lucide-react";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-radial-sky p-4">
-      <h1 className="text-2xl font-bold mb-6">Selecciona tu perfil</h1>
-      <div className="flex flex-col gap-4 w-full max-w-xs">
-        <Link href="/parent-dashboard">
-          <Button size="lg" className="w-full">
-            Soy Padre
-          </Button>
-        </Link>
-        <Link href="/dragon">
-          <Button size="lg" className="w-full">
-            Soy Niño
-          </Button>
-        </Link>
+    <div className="min-h-screen flex flex-col justify-center items-center p-4">
+      <div className="w-full max-w-sm">
+        <div className="p-6">
+          <h1 className="text-3xl font-bold mb-8 text-center text-blue-800">
+            ¿Quién eres?
+          </h1>
+          <div className="flex flex-col gap-6 w-full">
+            <Link href="/dragon" className="w-full">
+              <Button
+                size="lg"
+                className="w-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center gap-4 h-36 text-lg font-bold rounded-lg shadow-lg"
+              >
+                <UserCircle className="w-8 h-8" />
+                Jugador
+              </Button>
+            </Link>
+            <Link href="/parent-dashboard" className="w-full">
+              <Button
+                size="lg"
+                className="w-full bg-blue-600 hover:bg-blue-800 text-white flex items-center justify-center gap-4 h-36 text-lg font-bold rounded-lg shadow-lg"
+              >
+                <User className="w-8 h-8" />
+                Tutor
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
