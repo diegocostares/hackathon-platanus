@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BtnSaldo from "@/components/btnSaldo";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function DragonPage() {
   const [items, setItems] = useState([
@@ -25,14 +26,15 @@ export default function DragonPage() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col justify-center items-center p-4">
-        <div className="w-full max-w-md mb-8">
-          <Progress value={33} className="h-4" />
-          <p className="text-center mt-2 text-sm text-gray-700">
-            4.000 EXP / 12.000 EXP
-          </p>
-        </div>
-
+      <main className="flex-1 flex flex-col justify-center items-center px-4">
+        <Link href="/expenses">
+          <Button
+            className="bg-blue-500 hover:bg-blue-600 w-full mb-12"
+            size="lg"
+          >
+            Agregar gastos
+          </Button>
+        </Link>
         <div className="flex flex-col items-center justify-center gap-6">
           {/* Imagen de la mascota con animación */}
           <div className="relative w-64 h-64 animate-bounce">
@@ -44,8 +46,15 @@ export default function DragonPage() {
             />
           </div>
 
+          <div className="w-full max-w-md">
+            <Progress value={33} className="h-4" />
+            <p className="text-center mt-2 text-sm text-gray-700">
+              4.000 EXP / 12.000 EXP
+            </p>
+          </div>
+
           {/* List of purchased items */}
-          <ul className="list-none mb-10">
+          <ul className="list-none mb-40">
             {items.map((item, index) => (
               <li key={index} className="flex flex-wrap">
                 <span>{item.name}</span>
