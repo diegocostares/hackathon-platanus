@@ -17,7 +17,7 @@ api.add_router("/goals", goals_router)
 api.add_router("/transactions", transactions_router)
 api.add_router("/inventories", inventories_router)
 api.add_router("/items", items_router)
-api.add_router("/draginAI", dragonAI_router)
+api.add_router("/dragonAI", dragonAI_router)
 
 
 @api.get("/status")
