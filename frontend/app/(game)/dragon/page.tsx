@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function DragonPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-sky-100">
+    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="w-full shadow-md">
         <CardContent className="flex justify-between items-center py-4 px-6 max-w-4xl mx-auto">
