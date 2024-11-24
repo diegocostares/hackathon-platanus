@@ -21,10 +21,12 @@ export default function SavingGoalsPage() {
     fetchAllowance();
   }, []);
 
+  let dragon2unlocked = amount >= 1500 ? true : false
+
   const eggs = [
     { id: 1, image: "/3.png", unlocked: true, name: "Dragón Mañoso" },
-    { id: 2, image: "/4.png", unlocked: true, name: "Dragón Mañoso Nivel 2" },
-    { id: 3, image: "/egg.svg", unlocked: true, name: "Dragón Mañoso Nivel 3" },
+    { id: 2, image: "/4.png", unlocked: dragon2unlocked, name: "Dragón Mañoso Nivel 2" },
+    { id: 3, image: "/5.png", unlocked: false, name: "Dragón Mañoso Nivel 3" },
     { id: 4, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 1" },
     { id: 5, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 2" },
     { id: 6, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 3" },
@@ -36,8 +38,6 @@ export default function SavingGoalsPage() {
     { id: 12, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 3" },
   ];
 
-  let dragon2Image = amount >= 1500 ? "/4.png" : "/egg.svg"
-  let dragon2unlocked = amount >= 1500 ? true : false
 
   const goals = [
     {
@@ -54,15 +54,15 @@ export default function SavingGoalsPage() {
       description: "1500 de Oro Ahorrados",
       reward: "Dragón Mañoso Nivel 2",
       unlocked: dragon2unlocked,
-      image: dragon2Image,
+      image: "/4.png",
     },
     {
       id: 3,
       name: "Volando los Cielos",
       description: "2000 de Oro Necesarios",
-      reward: "Dragón Hada Nivel 1",
+      reward: "Dragón Mañoso Nivel 3",
       unlocked: false,
-      image: "/egg.svg",
+      image: "/5.png",
     },
   ];
 
