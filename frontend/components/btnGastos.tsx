@@ -3,21 +3,21 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getAllowance } from "@/api/getAllowance";
+import { getExpenses } from "@/api/getExpenses";
 
 export default function BtnGastos() {
   const [amount, setAmount] = useState<number | null>(null);
 
   useEffect(() => {
-    async function fetchAllowance() {
+    async function fetchExpenses() {
       try {
-        const data = await getAllowance();
+        const data = await getExpenses();
         setAmount(data.amount);
       } catch (error) {
         console.error("Failed to fetch allowance", error);
       }
     }
-    fetchAllowance();
+    fetchExpenses();
   }, []);
 
   return (

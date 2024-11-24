@@ -109,7 +109,7 @@ class Command(BaseCommand):
         expenses = Expenses.objects.create(
             # for_user=user2.profile,  # Uncomment if UserProfile is used
             # defined_by=user1.profile,  # Uncomment if UserProfile is used
-            amount=Decimal('2000')
+            amount=Decimal('2000.00')
         )
 
         # Create Transactions

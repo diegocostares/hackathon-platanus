@@ -4,6 +4,7 @@ import { useState } from "react";
 import ExpensesInput from "@/components/expensesInput";
 import { CardContent } from "@/components/ui/card";
 import BtnSaldo from "@/components/btnSaldo";
+import BtnGastos from "@/components/btnGastos";
 
 export default function ExpensesPage() {
   const [gold, setGold] = useState(1000);
@@ -20,7 +21,7 @@ export default function ExpensesPage() {
 
       <div className="max-w-4xl mx-auto mb-6">
         <CardContent className="flex justify-center items-center py-4 px-6">
-          <BtnSaldo />
+          <BtnGastos />
         </CardContent>
       </div>
 
