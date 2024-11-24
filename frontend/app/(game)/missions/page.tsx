@@ -22,6 +22,7 @@ interface Task {
 
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchMissions() {
@@ -35,6 +36,12 @@ export default function Tasks() {
 
     fetchMissions();
   }, []);
+
+  useEffect(() => {
+    if (tasks.length > 0) {
+      setLoading(false);
+    }
+  }, [tasks]);
 
   const totalReward = tasks.reduce(
     (sum, task) =>
@@ -66,6 +73,15 @@ export default function Tasks() {
       console.error("Failed to update task or allowance:", error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="container mx-auto p-4 max-w-2xl">
+        <h1 className="text-3xl font-bold mb-6 text-center">Tareas del Día</h1>
+        <p className="text-lg text-center">Cargando tareas...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4 max-w-2xl">

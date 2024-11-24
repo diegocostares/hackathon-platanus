@@ -123,9 +123,9 @@ export default function SavingGoalsPage() {
             Ahorro Actual: {amount !== null ? `$${amount}` : "Loading..."} de Oro
           </h2>
           <h3 className="text-sm text-center text-gray-600">
-            Próxima meta: 2000 de Oro
+            Próxima meta: 1200 de Oro
           </h3>
-          <Progress value={75} className="h-4 mt-4" />
+          <Progress value={99} className="h-4 mt-4" />
         </div>
 
         {/* Goals Timeline */}
