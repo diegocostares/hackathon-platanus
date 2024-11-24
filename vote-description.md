@@ -1,6 +1,8 @@
 # Little Dragons - Finanzas y Dragones
 
-<img width="580" alt="Logo" src="./logo.png">
+<p align="center">
+  <img width="580" alt="Logo" src="./logo.png">
+</p>
 
 ### Transformando educación financiera en diversión
 
