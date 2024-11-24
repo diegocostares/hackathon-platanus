@@ -1,10 +1,6 @@
 import Image from "next/image";
 
-export default function GoalProgressBar() {
-  // Valores constantes para pruebas
-  const currentValue = 2000; // 2000 oro actual
-  const goalValue = 4000; // Meta de 4000 oro
-  const progress = (currentValue / goalValue) * 100;
+export default function GoalProgressBar({ progress }) {
 
   return (
     <div className="relative w-full max-w-4xl mx-auto mb-8">

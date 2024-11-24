@@ -5,28 +5,18 @@ import Image from "next/image";
 import BtnSaldo from "@/components/btnSaldo";
 import GoalProgressBar from "@/components/goal-progress-bar";
 import LastExpenses from "@/components/last-expenses";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import dragonVoice from "@/components/dragonVoice";
+import { getAllowance } from "@/api/allowances";
 
 export default function DragonPage() {
-  const [isTalking, setIsTalking] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
-  const [response, setResponse] = useState("");
-  const responseRef = useRef<HTMLDivElement>(null);
+  const [allowance, setAllowance] = useState(0);
 
-  const handleTalkClick = async () => {
-    setIsTalking(true);
-    try {
-      const res = await fetch("/api/dragon-talk");
-      const data = await res.json();
-      setResponse(data.message || "¡Hola! ¿Cómo puedo ayudarte?");
-    } catch (error) {
-      console.error("Error fetching dragon response:", error);
-      setResponse("Lo siento, no puedo hablar ahora.");
-    }
-    setTimeout(() => setIsTalking(false), 4000);
-  };
+  useEffect(() => {
+    getAllowance().then((data) => setAllowance(data.amount));
+  }, []);
 
   const handleMascotPressStart = () => {
     setIsShaking(true);
@@ -53,7 +43,7 @@ export default function DragonPage() {
             <BtnSaldo />
           </CardContent>
         </div>
-        <GoalProgressBar />
+        <GoalProgressBar progress={(allowance / 4000) * 100} />
       </header>
 
       {/* Main Content */}
@@ -74,14 +64,6 @@ export default function DragonPage() {
             layout="fill"
             objectFit="contain"
           />
-          {isTalking && (
-            <div
-              ref={responseRef}
-              className="absolute top-[-20px] right-[-20px] bg-white shadow-md p-3 rounded-md text-sm text-gray-700 max-w-xs"
-            >
-              <p>{response}</p>
-            </div>
-          )}
         </div>
 
         {dragonVoice()}
