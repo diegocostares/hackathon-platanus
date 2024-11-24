@@ -23,13 +23,13 @@ export default function SavingGoalsPage() {
     fetchAllowance();
   }, []);
 
-  let dragon1unlocked = amount >= 1200 ? true : false;
-  let dragon2unlocked = amount >= 1500 ? true : false;
+  const dragon1unlocked = amount >= 1200 ? true : false;
+  const dragon2unlocked = amount >= 1500 ? true : false;
 
   const eggs = [
     {
       id: 1,
-      image: "/3.png",
+      image: "/dragon_1.svg",
       unlocked: dragon1unlocked,
       name: "Dragón Mañoso",
     },

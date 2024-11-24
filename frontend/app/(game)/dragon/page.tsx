@@ -70,7 +70,7 @@ export default function DragonPage() {
           onTouchEnd={handleMascotPressEnd}
         >
           <Image
-            src="/2.png"
+            src="/dragon_0_1.png"
             alt="Mascota del juego"
             layout="fill"
             objectFit="contain"

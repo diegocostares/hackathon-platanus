@@ -124,7 +124,7 @@ export default function CoinCatcherGame() {
     bombImage.src = "/bomb.webp";
 
     const playerImage = new Image();
-    playerImage.src = "/2.png";
+    playerImage.src = "/dragon_0_1.png";
 
     const gameLoop = () => {
       if (gameOver) return;
