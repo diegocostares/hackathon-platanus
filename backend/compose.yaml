@@ -6,14 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     container_name: api
     hostname: api
     networks:
-      default:
-        aliases:
-          - api.local
+      - web
     volumes:
       - ./api:/app
     env_file:
@@ -27,9 +25,7 @@ services:
     container_name: postgres
     hostname: postgres
     networks:
-      default:
-        aliases:
-          - postgres.local
+      - web
     ports:
       - "5432:5432"
     environment:
@@ -39,20 +35,24 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
-  # redis:
-  #   image: redis:latest
-  #   restart: always
-  #   container_name: redis
-  #   hostname: redis
-  #   networks:
-  #     default:
-  #       aliases:
-  #         - redis.local
-  #   ports:
-  #     - "6379:6379"
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/html:/usr/share/nginx/html
+    networks:
+      - web
+    depends_on:
+      - api
 
 networks:
-  default:
+  web:
 
 volumes:
   api:
