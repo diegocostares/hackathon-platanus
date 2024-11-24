@@ -1,6 +1,6 @@
-from openai import OpenAI
 from django.conf import settings
 from ninja import Router
+from openai import OpenAI
 
 router = Router(tags=["DragonVoice"])
 
@@ -45,4 +45,6 @@ def generate_openai_response_expenses(request, question:str):
         messages=prompt,
     )
 
-    return response.choices[0].message.content
+    ai_response = response.choices[0].message.content
+
+    return ai_response
