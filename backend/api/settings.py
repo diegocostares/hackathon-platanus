@@ -179,6 +179,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
     "http://diegocostar.me/",
+    "https://littledragons.games",
+    "http://littledragons.games",
 ]
 
 # Asegúrate de que CORS está configurado correctamente
