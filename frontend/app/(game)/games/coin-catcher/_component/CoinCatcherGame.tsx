@@ -1,11 +1,11 @@
+// components/CoinCatcherGame.tsx
+
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -39,10 +39,26 @@ export default function CoinCatcherGame() {
     const context = canvas.getContext("2d");
     if (!context) return;
 
+    const footerHeight = 130; // Altura del footer
+    const titleHeight = 50; // Altura del título
+    const padding = 20; // Padding general
+
     const resizeCanvas = () => {
-      canvas.width = 400;
-      canvas.height = 700;
-      playerX.current = (canvas.width - playerWidth()) / 2; // Center player
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+
+      // Calcular el tamaño disponible para el canvas
+      const availableHeight =
+        viewportHeight - footerHeight - titleHeight - padding * 4; // 4 * padding
+      const availableWidth = viewportWidth - padding * 2;
+
+      // Ajustar el canvas para que sea compacto y responsivo
+      const canvasWidth = Math.min(400, availableWidth * 0.9); // 90% del ancho disponible o 400px
+      const canvasHeight = availableHeight * 0.9; // 95% del alto disponible
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+      playerX.current = (canvas.width - playerWidth()) / 2; // Centrar al jugador
     };
 
     const playerWidth = () => 60;
@@ -67,10 +83,12 @@ export default function CoinCatcherGame() {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       keysPressed.current[e.code] = true;
+      e.preventDefault(); // Evitar scroll
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
       keysPressed.current[e.code] = false;
+      e.preventDefault(); // Evitar scroll
     };
 
     const handleMouseDown = () => {
@@ -91,6 +109,8 @@ export default function CoinCatcherGame() {
       if (playerX.current < 0) playerX.current = 0;
       if (playerX.current + playerWidth() > canvas.width)
         playerX.current = canvas.width - playerWidth();
+
+      e.preventDefault(); // Evitar scroll
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -101,6 +121,8 @@ export default function CoinCatcherGame() {
       if (playerX.current < 0) playerX.current = 0;
       if (playerX.current + playerWidth() > canvas.width)
         playerX.current = canvas.width - playerWidth();
+
+      e.preventDefault(); // Evitar scroll
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -108,7 +130,7 @@ export default function CoinCatcherGame() {
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mouseup", handleMouseUp);
     canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("touchmove", handleTouchMove);
+    canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     const spawnObject = () => {
       const type = Math.random() < 0.7 ? "coin" : "bomb";
@@ -133,7 +155,7 @@ export default function CoinCatcherGame() {
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw player
+      // Dibujar jugador
       context.drawImage(
         playerImage,
         playerX.current,
@@ -146,11 +168,11 @@ export default function CoinCatcherGame() {
         const obj = objects.current[i];
         obj.y += 3;
 
-        // Draw objects
+        // Dibujar objetos
         const image = obj.type === "coin" ? coinImage : bombImage;
         context.drawImage(image, obj.x, obj.y, obj.width, obj.height);
 
-        // Collision detection
+        // Detección de colisiones
         if (
           obj.x < playerX.current + playerWidth() &&
           obj.x + obj.width > playerX.current &&
@@ -168,19 +190,19 @@ export default function CoinCatcherGame() {
           continue;
         }
 
-        // Remove objects that are off-screen
+        // Remover objetos fuera de pantalla
         if (obj.y > canvas.height) {
           objects.current.splice(i, 1);
           i--;
         }
       }
 
-      // Draw score
+      // Dibujar puntaje
       context.fillStyle = "#000000";
       context.font = "20px Arial";
       context.fillText(`Puntaje: ${scoreRef.current}`, 10, 30);
 
-      // Spawn new objects
+      // Generar nuevos objetos
       if (Math.random() < 0.02) {
         spawnObject();
       }
@@ -214,17 +236,19 @@ export default function CoinCatcherGame() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="relative w-full h-full flex justify-center items-start">
       <canvas
         ref={canvasRef}
         className="border border-gray-400 rounded-md"
-        style={{ width: "400px", height: "700px" }}
+        style={{
+          maxWidth: "400px",
+          width: "100%",
+          height: "77%", // Llenar el contenedor
+          touchAction: "none",
+        }}
       />
-      <p className="text-center mt-4 text-sm text-gray-600">
-        Desliza, haz clic o mantén presionado para mover
-      </p>
 
-      {/* Game Over Dialog */}
+      {/* Dialogo de Juego Terminado */}
       {gameOver && (
         <AlertDialog open={gameOver} onOpenChange={setGameOver}>
           <AlertDialogContent className="max-w-md p-8">
@@ -237,7 +261,7 @@ export default function CoinCatcherGame() {
                 <span className="font-bold">{scoreRef.current}</span>
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="mt-6 flex flex-col gap-4">
+            <AlertDialogFooter className="mt-6">
               <Button
                 size="lg"
                 onClick={resetGame}
@@ -245,35 +269,10 @@ export default function CoinCatcherGame() {
               >
                 Jugar de Nuevo
               </Button>
-              <Link href="/games">
-                <Button size="lg" variant="outline" className="w-full">
-                  Volver a Juegos
-                </Button>
-              </Link>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       )}
-
-      {/* Buttons */}
-      <div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
-        <Link href="/games">
-          <Button
-            size="lg"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
-          >
-            Volver a Juegos
-          </Button>
-        </Link>
-        <Link href="/dragon">
-          <Button
-            size="lg"
-            className="w-full bg-green-500 hover:bg-green-600 text-white"
-          >
-            Volver a la Página Principal
-          </Button>
-        </Link>
-      </div>
     </div>
   );
 }

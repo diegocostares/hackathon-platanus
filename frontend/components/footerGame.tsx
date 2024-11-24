@@ -40,7 +40,7 @@ export default function FooterGame() {
   ).length;
 
   return (
-    <footer className="fixed bottom-0 w-full shadow-md py-2 pt-4 bg-gray-50">
+    <footer className="fixed bottom-0 w-full shadow-md py-2 pt-4 bg-gray-50 z-50">
       <div className="flex justify-between gap-4 sm:gap-8 md:gap-12 max-w-4xl mx-auto px-4">
         {/* Enlace Mi Dragon */}
         <Link href="/dragon">

@@ -1,3 +1,5 @@
+// app/saving-goals/page.tsx
+
 "use client";
 
 import Image from "next/image";
@@ -5,11 +7,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 import { getAllowance } from "@/api/getAllowance";
-import { DragonShop } from "@/components/DragonShop";
+import { ShopWindow } from "@/components/shop-window";
 
 export default function SavingGoalsPage() {
-  const [amount, setAmount] = useState(null);
-  const [selectedDragon, setSelectedDragon] = useState(null);
+  const [amount, setAmount] = useState<number | null>(null);
+  const [selectedDragon, setSelectedDragon] = useState<any>(null);
 
   useEffect(() => {
     async function fetchAllowance() {
@@ -23,23 +25,28 @@ export default function SavingGoalsPage() {
     fetchAllowance();
   }, []);
 
-  const dragon1unlocked = amount >= 1200 ? true : false;
-  const dragon2unlocked = amount >= 1500 ? true : false;
+  const dragon1unlocked = amount !== null && amount >= 1200 ? true : false;
+  const dragon2unlocked = amount !== null && amount >= 1500 ? true : false;
 
   const eggs = [
     {
       id: 1,
-      image: "/dragon_1.svg",
+      image: "/dragon_1_1.png",
       unlocked: dragon1unlocked,
       name: "Dragón Mañoso",
     },
     {
       id: 2,
-      image: "/4.png",
+      image: "/dragon_2_1.png",
       unlocked: dragon2unlocked,
       name: "Dragón Mañoso Nivel 2",
     },
-    { id: 3, image: "/5.png", unlocked: false, name: "Dragón Mañoso Nivel 3" },
+    {
+      id: 3,
+      image: "/dragon_3_1.png",
+      unlocked: false,
+      name: "Dragón Mañoso Nivel 3",
+    },
     { id: 4, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 1" },
     { id: 5, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 2" },
     { id: 6, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 3" },
@@ -88,7 +95,8 @@ export default function SavingGoalsPage() {
       description: "1200 de Oro Ahorrados",
       reward: "Dragón Mañoso",
       unlocked: dragon1unlocked,
-      image: "/3.png",
+      image: "/dragon_1_1.png",
+      progress: amount !== null ? (amount / 1200) * 100 : 0,
     },
     {
       id: 2,
@@ -96,7 +104,8 @@ export default function SavingGoalsPage() {
       description: "1500 de Oro Ahorrados",
       reward: "Dragón Mañoso Nivel 2",
       unlocked: dragon2unlocked,
-      image: "/4.png",
+      image: "/dragon_2_1.png",
+      progress: amount !== null ? (amount / 1500) * 100 : 0,
     },
     {
       id: 3,
@@ -104,7 +113,8 @@ export default function SavingGoalsPage() {
       description: "2000 de Oro Necesarios",
       reward: "Dragón Mañoso Nivel 3",
       unlocked: false,
-      image: "/5.png",
+      image: "/dragon_3_1.png",
+      progress: amount !== null ? (amount / 2000) * 100 : 0,
     },
   ];
 
@@ -144,7 +154,7 @@ export default function SavingGoalsPage() {
                 </p>
                 {!goal.unlocked && (
                   <Progress
-                    value={50}
+                    value={goal.progress > 100 ? 100 : goal.progress}
                     className="mt-2 h-2 group-hover:bg-blue-200"
                   />
                 )}
@@ -163,13 +173,22 @@ export default function SavingGoalsPage() {
         {/* Savings Progress */}
         <div className="w-full max-w-md mb-8">
           <h2 className="text-xl font-bold text-center text-gray-800">
-            Ahorro Actual: {amount !== null ? `$${amount}` : "Loading..."} de
-            Oro
+            Ahorro Actual:{" "}
+            {amount !== null ? `${amount} de Oro` : "Cargando..."}
           </h2>
           <h3 className="text-sm text-center text-gray-600">
             Próxima meta: 1200 de Oro
           </h3>
-          <Progress value={99} className="h-4 mt-4" />
+          <Progress
+            value={
+              amount !== null
+                ? (amount / 1200) * 100 > 100
+                  ? 100
+                  : (amount / 1200) * 100
+                : 0
+            }
+            className="h-4 mt-4"
+          />
         </div>
 
         {/* Goals Timeline */}
@@ -215,9 +234,10 @@ export default function SavingGoalsPage() {
       </section>
 
       {selectedDragon && (
-        <DragonShop
-          dragon={selectedDragon}
+        <ShopWindow
+          isOpen={!!selectedDragon}
           onClose={() => setSelectedDragon(null)}
+          dragon={selectedDragon}
         />
       )}
     </div>

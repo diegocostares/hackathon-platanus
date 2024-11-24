@@ -46,8 +46,7 @@ export default function GameLayout({
   };
 
   return (
-    <div>
-      {/* Elemento de Audio */}
+    <>
       <audio ref={audioRef} loop>
         <source src="/audio/Dog Park - Silent Partner.mp3" type="audio/mpeg" />
         Tu navegador no soporta el elemento de audio.
@@ -65,9 +64,8 @@ export default function GameLayout({
         )}
       </button>
 
-      {/* Contenido del layout */}
       {children}
       <FooterGame />
-    </div>
+    </>
   );
 }

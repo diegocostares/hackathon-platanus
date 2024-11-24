@@ -42,7 +42,7 @@ export default function DinosaurGame() {
     const loadImages = async () => {
       await Promise.all([
         new Promise<void>((resolve) => {
-          dinoImage.current!.src = "/5.png";
+          dinoImage.current!.src = "/dragon_3_1.png";
           dinoImage.current!.onload = () => resolve();
         }),
         new Promise<void>((resolve) => {
