@@ -92,10 +92,16 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.TextField()),
-                ('reward', models.IntegerField()),
-                ('description', models.TextField()),
-                ('unlocked', models.BooleanField(default=False)),
+                ('reward', models.TextField()),
+                ('objective', models.IntegerField()),
                 ('image', models.CharField(max_length=255)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Expenses',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('amount', models.IntegerField()),
             ],
         ),
     ]
