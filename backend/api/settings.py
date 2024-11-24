@@ -199,3 +199,23 @@ NINJA_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
     # TODO: Revisar https://eadwincode.github.io/django-ninja-jwt/settings/
 }
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+
+ALLOWED_HOSTS = ['littledragons.games']
+
+INSTALLED_APPS = [
+    # ...
+    'corsheaders',
+    # ...
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    # ...
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
+]
