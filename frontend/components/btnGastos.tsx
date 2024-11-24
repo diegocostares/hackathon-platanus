@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getAllowance } from "@/api/getAllowance";
 
-export default function BtnSaldo() {
+export default function BtnGastos() {
   const [amount, setAmount] = useState<number | null>(null);
 
   useEffect(() => {
@@ -23,9 +23,9 @@ export default function BtnSaldo() {
   return (
     <Card className="px-16 py-2">
       <div className="flex items-center gap-2">
-        <Image src="/money.svg" alt="Monedas" width={60} height={60} />
+        <Image src="/billetera.svg" alt="Monedas" width={60} height={60} />
         <div className="flex flex-col">
-          <span className="text-lg text-gray-600">Ahorro</span>
+          <span className="text-lg text-gray-600">Gastos</span>
           <span className="font-bold text-xl">
             {amount !== null ? (
               `$${amount}`
