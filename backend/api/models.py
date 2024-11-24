@@ -81,6 +81,7 @@ class Item(models.Model):
     name = models.CharField(max_length=255)  # Nombre del ítem
     price = models.IntegerField()  # Precio del ítem
     description = models.TextField()  # Descripción del ítem
+    category = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
