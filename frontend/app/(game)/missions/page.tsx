@@ -4,9 +4,24 @@ import { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Trophy } from "lucide-react";
 import { getMissions } from "@/api/getMissions";
+import { switchMissionStatus } from "@/api/switchMissionStatus";
+import { updateAllowance } from "@/api/updateAllowance";
+
+const ALLOWANCE_ID = 1;
+
+interface Task {
+  id: number;
+  name: string;
+  description: string;
+  reward_type: string;
+  reward_amount: number;
+  status: string;
+  date_assigned: string;
+  date_completed: string | null;
+}
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     async function fetchMissions() {
@@ -26,19 +41,30 @@ export default function Tasks() {
       task.status === "completed" ? sum + task.reward_amount : sum,
     0
   );
+
   const maxReward = tasks.reduce((sum, task) => sum + task.reward_amount, 0);
 
-  const handleToggleStatus = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              status: task.status === "completed" ? "pending" : "completed",
-            }
-          : task
-      )
-    );
+  const handleToggleStatus = async (id: number) => {
+    const task = tasks.find((task) => task.id === id);
+    if (!task) return;
+
+    try {
+      const updatedTask = await switchMissionStatus(id);
+
+      const newStatus = updatedTask.status;
+      const action = newStatus === "completed" ? "add" : "subtract";
+      const amount = task.reward_amount;
+
+      await updateAllowance(ALLOWANCE_ID, amount, action);
+
+      setTasks(
+        tasks.map((task) =>
+          task.id === id ? { ...task, status: newStatus } : task
+        )
+      );
+    } catch (error) {
+      console.error("Failed to update task or allowance:", error);
+    }
   };
 
   return (
@@ -55,7 +81,7 @@ export default function Tasks() {
         <Progress value={(totalReward / maxReward) * 100} className="h-4" />
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 mb-40">
         {tasks.map((task) => (
           <div
             key={task.id}
@@ -93,7 +119,7 @@ export default function Tasks() {
       {totalReward === maxReward && (
         <div className="mt-8 text-center">
           <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4 animate-pulse" />
-          <h2 className="text-2xl font-bold text-green-600">
+          <h2 className="text-2xl font-bold text-green-600 mb-40">
             ¡Felicidades! Has completado todas las tareas del día.
           </h2>
         </div>
