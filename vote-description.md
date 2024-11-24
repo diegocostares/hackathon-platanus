@@ -6,7 +6,7 @@
 
 ### Transformando educación financiera en diversión
 
-En Chile, uno de cada cinco personas destina más de la mitad de su ingreso a pagar deudas. **Little Dragons** es una plataforma educativa diseñada para enseñar a los niños de 8 a 10 años hábitos de ahorro y registro de gastos de forma divertida, ayudando a reducir el endeudamiento en las futuras generaciones.
+En Chile, uno de cada cinco personas destina más de la mitad de su ingreso a pagar deudas. [Little Dragons](https://main.d2xt9d1jaewt8a.amplifyapp.com) es una plataforma educativa diseñada para enseñar a los niños de 8 a 10 años hábitos de ahorro y registro de gastos de forma divertida, ayudando a reducir el endeudamiento en las futuras generaciones.
 
 ## ¿Qué ofrecemos?
 
