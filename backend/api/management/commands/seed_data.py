@@ -92,7 +92,7 @@ class Command(BaseCommand):
         allowance1 = Allowance.objects.create(
             # for_user=user2.profile,  # Uncomment if UserProfile is used
             # defined_by=user1.profile,  # Uncomment if UserProfile is used
-            amount=Decimal('1490.00')
+            amount=Decimal('1190.00')
         )
 
         expenses = Expenses.objects.create(
