@@ -132,3 +132,7 @@ class CreateInventorySchema(Schema):
 class ExpenseSchema(Schema):
     id: int
     amount: int
+
+
+class ExpenseCreateSchema(Schema):
+    amount: int

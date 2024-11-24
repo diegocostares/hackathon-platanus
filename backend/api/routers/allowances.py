@@ -49,7 +49,6 @@ def subtract_from_allowance(request, allowance_id: int, payload: AllowanceUpdate
             description=f"Allowance decreased by {decrease_amount}"
         )
 
-        expenses_wallet = Expenses.objects.last()
-        expenses_wallet.amount += decrease_amount
+        expenses_wallet = Expenses.objects.create(amount=decrease_amount)
         expenses_wallet.save()
     return allowance
