@@ -8,27 +8,6 @@ class Command(BaseCommand):
     help = "Seed the database with initial data"
 
     def handle(self, *args, **kwargs):
-        # Create DragonTypes
-        dragon_type1 = DragonType.objects.create(
-            name='Dragón Mañoso',
-            description='Un dragón bien Mañoso',
-            unlock_requirements='Cumple las metas necesarias.'
-        )
-
-        # Create Dragons
-        dragon1 = Dragon.objects.create(
-            # user_profile=user2.profile,  # Uncomment if UserProfile is used
-            dragon_type=dragon_type1,
-            phase=1,
-            experience=100
-        )
-
-        # Create EvolutionGoals
-        evolution_goal1 = EvolutionGoal.objects.create(
-            dragon_type=dragon_type1,
-            phase=2,
-            experience_required=200
-        )
 
                 # Create Items and Inventories
         items_data = [
