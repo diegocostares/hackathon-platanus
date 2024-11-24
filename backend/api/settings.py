@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Environment variables
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-y51490ks^)m(0^y$t6*%%9v(o!2uaps#8wk%@cbz%l$bgwroj8")
 DEBUG = True
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = ['littledragons.games']
 
 # Email Backend
 # TODO: django.core.mail.backends.smtp.EmailBackend
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "ninja_jwt",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "api.urls"
@@ -202,19 +204,6 @@ NINJA_JWT = {
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
-
-ALLOWED_HOSTS = ['littledragons.games']
-
-INSTALLED_APPS = [
-    # ...
-    'corsheaders',
-    # ...
-]
-
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    # ...
-]
 
 CORS_ALLOWED_ORIGINS = [
     "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
