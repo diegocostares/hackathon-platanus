@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 export default function LastExpenses() {
   const items = [
-    { name: "Chocolate", price: 1500 },
-    { name: "Pasaje Micro", price: 500 },
+    { name: "chocolate", price: 1500 },
+    { name: "polera", price: 500 },
   ];
 
   return (

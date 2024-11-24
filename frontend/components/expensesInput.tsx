@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Loader, Mic } from "lucide-react";
 import { askAI } from "@/api/postAI";
 
-export default function ExpensesInput() {
+export default function ExpensesInput({ setItems }) {
   const [response, setResponse] = useState<string | null>(null);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +42,30 @@ export default function ExpensesInput() {
       const aiResponse = await askAI(question, "expenses");
       console.log(aiResponse);
 
-      setResponse(aiResponse);
+      const jsonMatch = aiResponse.match(/```json\n([\s\S]*?)\n```/);
+
+      if (jsonMatch && jsonMatch[1]) {
+        const jsonString = jsonMatch[1];
+
+        let parsedData;
+        try {
+          parsedData = JSON.parse(jsonString);
+        } catch (e) {
+          console.error("Error parsing JSON:", e);
+          setResponse("Error parsing AI response");
+          return;
+        }
+
+        setItems((prevItems) => [
+          ...prevItems,
+          { name: parsedData.producto_comprado, price: parsedData.precio },
+        ]);
+
+        setResponse("Item added successfully!");
+      } else {
+        console.error("Error extracting JSON from AI response");
+        setResponse("Error parsing AI response");
+      }
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setResponse("Error fetching AI response");
@@ -76,7 +99,7 @@ export default function ExpensesInput() {
         <button
           type="button"
           onClick={handleAdd}
-          className="p-2 bg-green-500 text-white rounded hover:bg-green-600 mb-2 sm:mb-0"
+          className="p-2 bg-green-500 text-white rounded hover:bg-green-600 mb-40 sm:mb-0"
         >
           Añadir
         </button>

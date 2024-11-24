@@ -2,18 +2,26 @@
 
 import { useState } from "react";
 import ExpensesInput from "@/components/expensesInput";
+import { CardContent } from "@/components/ui/card";
+import BtnSaldo from "@/components/btnSaldo";
 
 export default function ExpensesPage() {
   const [gold, setGold] = useState(1000);
   const [items, setItems] = useState([
-    { name: "Chocolate", price: 1500 },
-    { name: "Pasaje Micro", price: 500 },
+    { name: "chocolate", price: 1500 },
+    { name: "polera", price: 500 },
   ]);
   return (
     <div className="min-h-screen sky p-4 pt-16">
       {/* Header with title and gold amount */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">Uso del oro</h1>
+      </div>
+
+      <div className="max-w-4xl mx-auto mb-6">
+        <CardContent className="flex justify-center items-center py-4 px-6">
+          <BtnSaldo />
+        </CardContent>
       </div>
 
       {/* List of purchased items */}
@@ -30,7 +38,7 @@ export default function ExpensesPage() {
         ))}
       </ul>
 
-      <ExpensesInput />
+      <ExpensesInput setItems={setItems} />
     </div>
   );
 }
