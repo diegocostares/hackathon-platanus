@@ -6,7 +6,7 @@ import { IconoActualizacion } from "./_components/IconoActualizacion";
 import { TablaTransacciones } from "./_components/TablaTransacciones";
 import { GraficoTorta } from "./_components/GraficoTorta";
 import { PromediosCategorias } from "./_components/PromediosCategorias";
-import { getInventory } from "@/api/getInventories";
+import { getInventory } from "@/api/inventories";
 
 export default function ParentDashboardPage() {
   const [mesada, setMesada] = useState<number | null>(null);

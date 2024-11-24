@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader, Mic } from "lucide-react";
-import { askAI } from "@/api/postAI";
+import { askAI } from "@/api/dragonAI";
 
 export default function ExpensesInput({ setItems }) {
   const [response, setResponse] = useState<string | null>(null);

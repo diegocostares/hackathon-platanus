@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
-import { getAllowance } from "@/api/getAllowance";
+import { getAllowance } from "@/api/allowances";
 import { ShopWindow } from "@/components/shop-window";
 
 export default function SavingGoalsPage() {

@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Trophy } from "lucide-react";
-import { getMissions } from "@/api/getMissions";
-import { switchMissionStatus } from "@/api/switchMissionStatus";
-import { updateAllowance } from "@/api/updateAllowance";
+import { getMissions } from "@/api/missions";
+import { switchMissionStatus } from "@/api/missions";
+import { updateAllowance } from "@/api/allowances";
 
 const ALLOWANCE_ID = 1;
 

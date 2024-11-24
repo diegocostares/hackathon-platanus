@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { getMissions } from "@/api/getMissions";
+import { getMissions } from "@/api/missions";
 import { useState, useEffect } from "react";
 
 interface Task {

@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getAllowance } from "@/api/getAllowance";
+import { getAllowance } from "@/api/allowances";
 
 export default function BtnSaldo() {
   const [amount, setAmount] = useState<number | null>(null);

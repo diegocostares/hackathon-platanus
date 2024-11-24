@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getExpenses } from "@/api/getExpenses";
+import { getExpenses } from "@/api/expenses";
 
 export default function BtnGastos() {
   const [amount, setAmount] = useState<number | null>(null);
