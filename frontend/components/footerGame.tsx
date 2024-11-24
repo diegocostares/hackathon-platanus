@@ -98,7 +98,7 @@ export default function FooterGame() {
           </div>
         </Link>
 
-        {/* Enlace Granja */}
+        {/* Enlace metas */}
         <Link href="/goals">
           <div
             className={cn(
@@ -119,7 +119,7 @@ export default function FooterGame() {
                 pathname === "/farm" && "text-blue-600 font-bold"
               )}
             >
-              Granja
+              Metas
             </span>
           </div>
         </Link>

@@ -1,54 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Trophy } from "lucide-react";
-
-const initialTasks = [
-  {
-    id: 1,
-    name: "Hacer la cama",
-    description: "Ordena y limpia tu cama al levantarte.",
-    reward_type: "money",
-    reward_amount: 10,
-    status: "completed",
-  },
-  {
-    id: 2,
-    name: "Lavar los platos",
-    description: "Lava los platos después de la comida.",
-    reward_type: "money",
-    reward_amount: 15,
-    status: "pending",
-  },
-  {
-    id: 3,
-    name: "Sacar la basura",
-    description: "Lleva la basura al contenedor más cercano.",
-    reward_type: "money",
-    reward_amount: 5,
-    status: "pending",
-  },
-  {
-    id: 4,
-    name: "Hacer la tarea",
-    description: "Completa tus tareas escolares.",
-    reward_type: "money",
-    reward_amount: 20,
-    status: "pending",
-  },
-  {
-    id: 5,
-    name: "Alimentar a la mascota",
-    description: "Dale de comer a tu mascota.",
-    reward_type: "money",
-    reward_amount: 10,
-    status: "completed",
-  },
-];
+import { getMissions } from "@/api/getMissions";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    async function fetchMissions() {
+      try {
+        const missions = await getMissions();
+        setTasks(missions);
+      } catch (error) {
+        console.error("Failed to fetch missions:", error);
+      }
+    }
+
+    fetchMissions();
+  }, []);
 
   const totalReward = tasks.reduce(
     (sum, task) =>
