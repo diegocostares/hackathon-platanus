@@ -54,16 +54,10 @@ export default function ExpensesPage() {
   };
 
   return (
-    <div className="min-h-screen sky p-4">
+    <div className="min-h-screen sky p-4 pt-16">
       {/* Header with title and gold amount */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">Uso del oro</h1>
-        <Card className="px-4 py-2">
-          <div className="flex items-center gap-2">
-            <span className="text-yellow-600 text-2xl">💰</span>
-            <span className="font-bold text-xl">{gold}</span>
-          </div>
-        </Card>
       </div>
 
       {/* List of purchased items */}
@@ -82,9 +76,9 @@ export default function ExpensesPage() {
 
       {/* Explanation Text */}
       <p className="mb-4 text-center">
-        Puede ingresar productos y precios manualmente o usar el
-        micrófono para transcribir tu voz. Al presionar &quot;Añadir&quot;, los
-        productos se agregarán a la lista.
+        Puede ingresar productos y precios manualmente o usar el micrófono para
+        transcribir tu voz. Al presionar &quot;Añadir&quot;, los productos se
+        agregarán a la lista.
       </p>
 
       {/* Input fields with microphone and add button */}
@@ -99,7 +93,7 @@ export default function ExpensesPage() {
         </button>
         {/* Large input field */}
         <textarea
-          placeholder='Ingrese texto aquí...'
+          placeholder="Ingrese texto aquí..."
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           className="border p-2 flex-1 w-full sm:w-auto mb-2 sm:mb-0"

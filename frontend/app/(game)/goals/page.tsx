@@ -21,10 +21,11 @@ export default function SavingGoalsPage() {
     fetchAllowance();
   }, []);
 
+  let dragon1unlocked = amount >= 1200 ? true : false
   let dragon2unlocked = amount >= 1500 ? true : false
 
   const eggs = [
-    { id: 1, image: "/3.png", unlocked: true, name: "Dragón Mañoso" },
+    { id: 1, image: "/3.png", unlocked: dragon1unlocked, name: "Dragón Mañoso" },
     { id: 2, image: "/4.png", unlocked: dragon2unlocked, name: "Dragón Mañoso Nivel 2" },
     { id: 3, image: "/5.png", unlocked: false, name: "Dragón Mañoso Nivel 3" },
     { id: 4, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 1" },
@@ -45,7 +46,7 @@ export default function SavingGoalsPage() {
       name: "Pequeño Tesoro",
       description: "1200 de Oro Ahorrados",
       reward: "Dragón Mañoso",
-      unlocked: true,
+      unlocked: dragon1unlocked,
       image: "/3.png",
     },
     {

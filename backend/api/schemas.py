@@ -89,9 +89,8 @@ class AllowanceUpdateSchema(Schema):
 class GoalSchema(Schema):
     id: int
     name: str
-    reward: int
-    description: str
-    unlocked: bool
+    reward: str
+    objective: int
     image: str
 
 
@@ -125,3 +124,10 @@ class InventorySchema(Schema):
 class CreateInventorySchema(Schema):
     item_id: int
     quantity: int
+
+
+# ----------------------- Expenses Schemas -----------------------
+
+class ExpenseSchema(Schema):
+    id: int
+    amount: int

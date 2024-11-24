@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from api.models import DragonType, Dragon, EvolutionGoal, Item, Inventory, Mission, Allowance, Transaction, Goals
+from api.models import DragonType, Dragon, EvolutionGoal, Item, Inventory, Mission, Allowance, Transaction, Goals, Expenses
 from django.utils import timezone
 from decimal import Decimal
 
@@ -10,9 +10,9 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # Create DragonTypes
         dragon_type1 = DragonType.objects.create(
-            name='Fire Dragon',
-            description='A dragon with fiery breath.',
-            unlock_requirements='Complete the Fire Quest'
+            name='Dragón Mañoso',
+            description='Un dragón bien Mañoso',
+            unlock_requirements='Cumple las metas necesarias.'
         )
 
         # Create Dragons
@@ -41,13 +41,13 @@ class Command(BaseCommand):
             {
                 'name': 'Polera Platanus',
                 'price': 40,
-                'description': 'A wand with magical powers.',
+                'description': 'Una polera poderosa',
                 'quantity': 1
             },
             {
                 'name': 'Chaqueta',
                 'price': 30,
-                'description': 'A shield to protect dragons.',
+                'description': 'Una chaqueta estilosa',
                 'quantity': 1
             }
         ]
@@ -92,7 +92,13 @@ class Command(BaseCommand):
         allowance1 = Allowance.objects.create(
             # for_user=user2.profile,  # Uncomment if UserProfile is used
             # defined_by=user1.profile,  # Uncomment if UserProfile is used
-            amount=Decimal('10.00')
+            amount=Decimal('1190.00')
+        )
+
+        expenses = Expenses.objects.create(
+            # for_user=user2.profile,  # Uncomment if UserProfile is used
+            # defined_by=user1.profile,  # Uncomment if UserProfile is used
+            amount=Decimal('0.00')
         )
 
         # Create Transactions
@@ -105,19 +111,24 @@ class Command(BaseCommand):
 
         # Create Goals
         goal1 = Goals.objects.create(
-            name='Save for a new bike',
-            reward=100,
-            description='Save money to buy a new bike.',
-            unlocked=True,
+            name='Pequeño Tesoro',
+            reward='Dragón Mañoso',
+            objective=1200,
             image='image1'
         )
 
         goal2 = Goals.objects.create(
-            name='Save for a new ball',
-            reward=150,
-            description='Save money to buy a new ball.',
-            unlocked=False,
+            name='Aliento de Fuego',
+            reward='Dragón Mañoso Nivel 2',
+            objective=1500,
             image='image2'
+        )
+
+        goal3 = Goals.objects.create(
+            name='Volando los Cielos',
+            reward='Dragón Hada Nivel 1',
+            objective=2000,
+            image='image3'
         )
 
         self.stdout.write(self.style.SUCCESS('Database seeded successfully.'))
