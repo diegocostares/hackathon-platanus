@@ -4,12 +4,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { getMissions } from "@/api/getMissions";
+import { useState, useEffect } from "react";
+
+interface Task {
+  id: number;
+  name: string;
+  description: string;
+  reward_type: string;
+  reward_amount: number;
+  status: string;
+  date_assigned: string;
+  date_completed: string | null;
+}
 
 export default function FooterGame() {
   const pathname = usePathname();
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  // Número de notificaciones para "Misiones"
-  const missionNotifications = 5; // Cambia este número según sea necesario
+  useEffect(() => {
+    async function fetchMissions() {
+      try {
+        const missions = await getMissions();
+        setTasks(missions);
+      } catch (error) {
+        console.error("Failed to fetch missions:", error);
+      }
+    }
+
+    fetchMissions();
+  }, []);
+
+  const missionNotifications = tasks.filter(
+    (task) => task.status === "pending"
+  ).length;
 
   return (
     <footer className="fixed bottom-0 w-full shadow-md py-2 pt-4 bg-gray-50">
