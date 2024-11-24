@@ -2,7 +2,7 @@ from ninja import Router
 from typing import List
 from decimal import Decimal
 from django.shortcuts import get_object_or_404
-from api.models import Allowance, Transaction
+from api.models import Allowance, Transaction, Expenses
 from api.schemas import AllowanceSchema, AllowanceUpdateSchema
 
 router = Router(tags=["Allowances"])
@@ -48,4 +48,8 @@ def subtract_from_allowance(request, allowance_id: int, payload: AllowanceUpdate
             amount=decrease_amount,
             description=f"Allowance decreased by {decrease_amount}"
         )
+
+        expenses_wallet = Expenses.objects.last()
+        expenses_wallet.amount += decrease_amount
+        expenses_wallet.save()
     return allowance

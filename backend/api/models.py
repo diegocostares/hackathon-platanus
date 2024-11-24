@@ -179,7 +179,10 @@ class Transaction(models.Model):
 
 class Goals(models.Model):
     name = models.TextField()
-    reward = models.IntegerField()
-    description = models.TextField()
-    unlocked = models.BooleanField(default=False)
+    reward = models.TextField()
+    objective=models.IntegerField()
     image = models.CharField(max_length=255, default="")
+
+
+class Expenses(models.Model):
+    amount = models.IntegerField()
