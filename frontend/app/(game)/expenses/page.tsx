@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import ExpensesInput from "@/components/expensesInput";
 
 export default function ExpensesPage() {

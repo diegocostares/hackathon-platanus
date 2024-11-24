@@ -30,7 +30,9 @@ export default function SavingsGoalPage() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center p-6">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">Meta de Ahorro</h1>
+        <h1 className="text-2xl font-bold mb-6 text-gray-800">
+          Meta de Ahorro
+        </h1>
 
         {/* Timeline Container */}
         <div className="relative w-full max-w-xl">
@@ -43,18 +45,12 @@ export default function SavingsGoalPage() {
               </div>
               <div>
                 <h3 className="font-bold text-lg">Pequeño Tesoro</h3>
-<<<<<<< Updated upstream
-  <p className="text-sm text-gray-700">Ahorra 1200. +5000 EXP</p>
-=======
-                <p className="text-sm text-gray-700">
-                  Ahorra 1200. +5000 EXP
-                </p>
->>>>>>> Stashed changes
-              </div >
-            </div >
+                <p className="text-sm text-gray-700">Ahorra 1200. +5000 EXP</p>
+              </div>
+            </div>
 
-    {/* Evento 2 */ }
-    < div className = "flex items-start gap-4" >
+            {/* Evento 2 */}
+            <div className="flex items-start gap-4">
               <div className="w-16 flex-shrink-0">
                 <CheckCircle className="w-8 h-8 text-green-500" />
               </div>
@@ -64,10 +60,10 @@ export default function SavingsGoalPage() {
                   Ahorra 1500 de oro. +5000 EXP
                 </p>
               </div>
-            </div >
+            </div>
 
-    {/* Evento 3 */ }
-    < div className = "flex items-start gap-4" >
+            {/* Evento 3 */}
+            <div className="flex items-start gap-4">
               <div className="w-16 flex-shrink-0">
                 <Clock className="w-8 h-8 text-purple-500" />
               </div>
@@ -78,20 +74,15 @@ export default function SavingsGoalPage() {
                 </p>
                 <Progress value={50} className="mt-2 h-2" />
               </div>
-            </div >
-          </div >
-        </div >
-      </main >
-
-    {/* Footer */ }
-    < footer className = "w-full shadow-md py-4" >
-<<<<<<< Updated upstream
-      <div className="flex justify-center gap-4 max-w-4xl mx-auto"></div>
-=======
-        <div className="flex justify-center gap-4 max-w-4xl mx-auto">
+            </div>
+          </div>
         </div>
->>>>>>> Stashed changes
-      </footer >
-    </div >
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full shadow-md py-4">
+        <div className="flex justify-center gap-4 max-w-4xl mx-auto"></div>
+      </footer>
+    </div>
   );
 }

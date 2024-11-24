@@ -34,6 +34,7 @@ export default function GameLayout({
 
     return () => {
       document.removeEventListener("click", resumeAudio);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       audioRef.current?.pause();
     };
   }, []);

@@ -23,7 +23,7 @@ export default function ExpensesInput() {
         recognition.maxAlternatives = 1;
 
         recognition.onresult = async (event: any) => {
-            let userQuestion = event.results[0][0].transcript;
+            const userQuestion = event.results[0][0].transcript;
             setInputText(userQuestion);
         };
 
