@@ -19,7 +19,7 @@ api.add_router("/transactions", transactions_router)
 api.add_router("/inventories", inventories_router)
 api.add_router("/items", items_router)
 api.add_router("/dragonAI", dragonAI_router)
-api.add_router("/expenses", expenses_router)
+api.add_router("/dragonAI/expenses", expenses_router)
 
 
 @api.get("/status")
