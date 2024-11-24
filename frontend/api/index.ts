@@ -24,6 +24,7 @@ export async function fetchAPI(
     }
 
     return await response.json();
+    
   } catch (error) {
     console.error(`Error in fetchAPI (${method} ${endpoint}):`, error);
     throw error;
