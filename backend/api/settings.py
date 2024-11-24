@@ -23,13 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Environment variables
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-y51490ks^)m(0^y$t6*%%9v(o!2uaps#8wk%@cbz%l$bgwroj8")
 DEBUG = True
-ALLOWED_HOSTS = ['littledragons.games']
 
 # Email Backend
 # TODO: django.core.mail.backends.smtp.EmailBackend
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@frostaway.com")
-OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # EMAIL_USE_TLS = True
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
@@ -178,6 +177,8 @@ CSRF_COOKIE_SAMESITE = "Lax"  # Cambiar a None para solo permitir peticiones cro
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
+    "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
+    "http://diegocostar.me/",
 ]
 
 # Asegúrate de que CORS está configurado correctamente
@@ -202,8 +203,27 @@ NINJA_JWT = {
     # TODO: Revisar https://eadwincode.github.io/django-ninja-jwt/settings/
 }
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = True
+
+ALLOWED_HOSTS = [
+    "littledragons.games",
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
+    "http://diegocostar.me/",
+]
+
+INSTALLED_APPS = [
+    # ...
+    "corsheaders",
+    # ...
+]
+
+MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    # ...
+]
 
 CORS_ALLOWED_ORIGINS = [
     "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
