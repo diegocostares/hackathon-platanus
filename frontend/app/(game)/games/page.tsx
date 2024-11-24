@@ -11,6 +11,7 @@ const games = [
     icon: Coins,
     difficulty: "Fácil",
     color: "bg-amber-100",
+    enabled: true,
   },
   {
     title: "Dinosaurio Runner",
@@ -19,6 +20,7 @@ const games = [
     icon: Footprints,
     difficulty: "Medio",
     color: "bg-emerald-100",
+    enabled: false,
   },
   {
     title: "Flappy Dragon",
@@ -27,6 +29,7 @@ const games = [
     icon: Bird,
     difficulty: "Difícil",
     color: "bg-rose-100",
+    enabled: false,
   },
 ];
 
@@ -38,22 +41,45 @@ export default function GamesPage() {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-40">
         {games.map((game) => (
-          <Link href={game.href} key={game.title} className="block h-full">
-            <Card className="h-full transition-all duration-300 hover:shadow-md hover:translate-y-[-4px]">
-              <CardHeader className={`${game.color}`}>
-                <CardTitle className="flex items-center justify-between text-lg md:text-xl">
-                  {game.title}
-                  <game.icon className="h-5 w-5 md:h-6 md:w-6" />
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <p className="mb-4 text-sm md:text-base">{game.description}</p>
-                <Badge variant="secondary" className="text-xs md:text-sm">
-                  {game.difficulty}
-                </Badge>
-              </CardContent>
-            </Card>
-          </Link>
+          <div key={game.title} className="block h-full">
+            {game.enabled ? (
+              <Link href={game.href} className="block h-full">
+                <Card className="h-full transition-all duration-300 hover:shadow-md hover:translate-y-[-4px]">
+                  <CardHeader className={`${game.color}`}>
+                    <CardTitle className="flex items-center justify-between text-lg md:text-xl">
+                      {game.title}
+                      <game.icon className="h-5 w-5 md:h-6 md:w-6" />
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-4">
+                    <p className="mb-4 text-sm md:text-base">
+                      {game.description}
+                    </p>
+                    <Badge variant="secondary" className="text-xs md:text-sm">
+                      {game.difficulty}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              </Link>
+            ) : (
+              <Card className="h-full opacity-50 cursor-not-allowed">
+                <CardHeader className={`${game.color}`}>
+                  <CardTitle className="flex items-center justify-between text-lg md:text-xl">
+                    {game.title}
+                    <game.icon className="h-5 w-5 md:h-6 md:w-6" />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <p className="mb-4 text-sm md:text-base">
+                    {game.description}
+                  </p>
+                  <Badge variant="secondary" className="text-xs md:text-sm">
+                    Próximamente
+                  </Badge>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         ))}
       </div>
     </div>
