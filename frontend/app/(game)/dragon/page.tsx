@@ -6,8 +6,7 @@ import BtnSaldo from "@/components/btnSaldo";
 import GoalProgressBar from "@/components/goal-progress-bar";
 import LastExpenses from "@/components/last-expenses";
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Mic } from "lucide-react";
+import dragonVoice from "@/components/dragonVoice";
 
 export default function DragonPage() {
   const [isTalking, setIsTalking] = useState(false);
@@ -85,14 +84,7 @@ export default function DragonPage() {
           )}
         </div>
 
-        {/* Botón de audio */}
-        <button
-          onClick={handleTalkClick}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md flex items-center gap-2"
-        >
-          <Mic className="w-5 h-5" />
-          Hablar con la mascota
-        </button>
+        {dragonVoice()}
       </main>
 
       {/* Últimos gastos */}

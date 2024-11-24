@@ -4,9 +4,8 @@ export async function askAI(question: string, view: string): Promise<string> {
   const encodedQuestion = encodeURIComponent(question);
   let url = `${API_BASE_URL}/api/dragonAI/?question=${encodedQuestion}`;
   if (view == "expenses") {
-    url = `${API_BASE_URL}/api/dragonAI/expenses/?question=${encodedQuestion}`;
+    url = `${API_BASE_URL}/api/dragonAI/expenses?question=${encodedQuestion}`;
   }
-
 
   try {
     const response = await fetch(url, {
