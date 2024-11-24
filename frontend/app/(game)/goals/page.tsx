@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 import { getAllowance } from "@/api/getAllowance";
+import { DragonShop } from "@/components/DragonShop";
 
 export default function SavingGoalsPage() {
   const [amount, setAmount] = useState(null);
+  const [selectedDragon, setSelectedDragon] = useState(null);
 
   useEffect(() => {
     async function fetchAllowance() {
@@ -21,24 +23,63 @@ export default function SavingGoalsPage() {
     fetchAllowance();
   }, []);
 
-  let dragon1unlocked = amount >= 1200 ? true : false
-  let dragon2unlocked = amount >= 1500 ? true : false
+  let dragon1unlocked = amount >= 1200 ? true : false;
+  let dragon2unlocked = amount >= 1500 ? true : false;
 
   const eggs = [
-    { id: 1, image: "/3.png", unlocked: dragon1unlocked, name: "Dragón Mañoso" },
-    { id: 2, image: "/4.png", unlocked: dragon2unlocked, name: "Dragón Mañoso Nivel 2" },
+    {
+      id: 1,
+      image: "/3.png",
+      unlocked: dragon1unlocked,
+      name: "Dragón Mañoso",
+    },
+    {
+      id: 2,
+      image: "/4.png",
+      unlocked: dragon2unlocked,
+      name: "Dragón Mañoso Nivel 2",
+    },
     { id: 3, image: "/5.png", unlocked: false, name: "Dragón Mañoso Nivel 3" },
     { id: 4, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 1" },
     { id: 5, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 2" },
     { id: 6, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 3" },
-    { id: 7, image: "/egg.svg", unlocked: false, name: "Dragón Volcán Nivel 1" },
-    { id: 8, image: "/egg.svg", unlocked: false, name: "Dragón Volcán Nivel 2" },
-    { id: 9, image: "/egg.svg", unlocked: false, name: "Dragón Volcán Nivel 3" },
-    { id: 10, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 1" },
-    { id: 11, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 2" },
-    { id: 12, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 3" },
+    {
+      id: 7,
+      image: "/egg.svg",
+      unlocked: false,
+      name: "Dragón Volcán Nivel 1",
+    },
+    {
+      id: 8,
+      image: "/egg.svg",
+      unlocked: false,
+      name: "Dragón Volcán Nivel 2",
+    },
+    {
+      id: 9,
+      image: "/egg.svg",
+      unlocked: false,
+      name: "Dragón Volcán Nivel 3",
+    },
+    {
+      id: 10,
+      image: "/egg.svg",
+      unlocked: false,
+      name: "Dragón de Hielo Nivel 1",
+    },
+    {
+      id: 11,
+      image: "/egg.svg",
+      unlocked: false,
+      name: "Dragón de Hielo Nivel 2",
+    },
+    {
+      id: 12,
+      image: "/egg.svg",
+      unlocked: false,
+      name: "Dragón de Hielo Nivel 3",
+    },
   ];
-
 
   const goals = [
     {
@@ -82,8 +123,9 @@ export default function SavingGoalsPage() {
                 alt={goal.name}
                 width={64}
                 height={64}
-                className={`rounded-full transform transition-transform duration-300 group-hover:scale-110 ${goal.unlocked ? "border-green-500" : "border-gray-400"
-                  } border-4`}
+                className={`rounded-full transform transition-transform duration-300 group-hover:scale-110 ${
+                  goal.unlocked ? "border-green-500" : "border-gray-400"
+                } border-4`}
               />
             </div>
 
@@ -121,7 +163,8 @@ export default function SavingGoalsPage() {
         {/* Savings Progress */}
         <div className="w-full max-w-md mb-8">
           <h2 className="text-xl font-bold text-center text-gray-800">
-            Ahorro Actual: {amount !== null ? `$${amount}` : "Loading..."} de Oro
+            Ahorro Actual: {amount !== null ? `$${amount}` : "Loading..."} de
+            Oro
           </h2>
           <h3 className="text-sm text-center text-gray-600">
             Próxima meta: 1200 de Oro
@@ -144,8 +187,10 @@ export default function SavingGoalsPage() {
             {eggs.map((egg) => (
               <Card
                 key={egg.id}
-                className={`overflow-hidden transform transition-all duration-200 hover:scale-105 hover:shadow-lg ${egg.unlocked ? "bg-blue-50" : "bg-gray-100"
-                  }`}
+                className={`overflow-hidden transform transition-all duration-200 hover:scale-105 hover:shadow-lg ${
+                  egg.unlocked ? "bg-blue-50 cursor-pointer" : "bg-gray-100"
+                }`}
+                onClick={() => egg.unlocked && setSelectedDragon(egg)}
               >
                 <CardContent className="p-4">
                   <div className="relative aspect-square">
@@ -168,6 +213,13 @@ export default function SavingGoalsPage() {
           </div>
         </div>
       </section>
+
+      {selectedDragon && (
+        <DragonShop
+          dragon={selectedDragon}
+          onClose={() => setSelectedDragon(null)}
+        />
+      )}
     </div>
   );
 }
