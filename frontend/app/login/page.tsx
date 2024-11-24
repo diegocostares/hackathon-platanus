@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { User, UserCircle } from "lucide-react";
 
 export default function LoginPage() {
@@ -12,6 +11,7 @@ export default function LoginPage() {
             ¿Quién eres?
           </h1>
           <div className="flex flex-col gap-6 w-full">
+            {/* Enlace ajustado al layout de (game) */}
             <Link href="/dragon" className="w-full">
               <Button
                 size="lg"
