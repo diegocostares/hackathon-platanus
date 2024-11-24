@@ -29,7 +29,7 @@ def generate_openai_response(request, question:str):
 
 
 @router.post("/expenses", response=str)
-def generate_openai_response(request, question:str):
+def generate_openai_response_expenses(request, question:str):
     prompt = [
         {
             "role": "system",
