@@ -32,7 +32,7 @@ export default function VoiceAssistant() {
       try {
         setIsLoading(true);
 
-        const aiResponse = await askAI(userQuestion);
+        const aiResponse = await askAI(userQuestion, "None");
 
         setResponse(aiResponse);
       } catch (error) {

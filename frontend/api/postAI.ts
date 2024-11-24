@@ -1,8 +1,12 @@
 const API_BASE_URL = "http://18.236.234.148:8000";
 
-export async function askAI(question: string): Promise<string> {
+export async function askAI(question: string, view: string): Promise<string> {
   const encodedQuestion = encodeURIComponent(question);
-  const url = `${API_BASE_URL}/api/dragonAI/?question=${encodedQuestion}`;
+  let url = `${API_BASE_URL}/api/dragonAI/?question=${encodedQuestion}`;
+  if (view == "expenses") {
+    url = `${API_BASE_URL}/api/dragonAI/expenses/?question=${encodedQuestion}`;
+  }
+
 
   try {
     const response = await fetch(url, {

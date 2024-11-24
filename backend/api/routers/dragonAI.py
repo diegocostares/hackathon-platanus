@@ -26,3 +26,23 @@ def generate_openai_response(request, question:str):
     )
 
     return response.choices[0].message.content
+
+
+@router.post("/expenses", response=str)
+def generate_openai_response(request, question:str):
+    prompt = [
+        {
+            "role": "system",
+            "content": ("Según la siguiente frase, dame una estructura de output en JSON que indique el producto comprado, el tipo de producto y el precio."),
+        },
+        {"role": "user", "content": question},
+    ]
+
+    openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
+
+    response = openai_client.chat.completions.create(
+        model="gpt-4o",
+        messages=prompt,
+    )
+
+    return response.choices[0].message.content
