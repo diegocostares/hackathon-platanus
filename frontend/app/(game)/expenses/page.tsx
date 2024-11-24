@@ -15,8 +15,8 @@ export default function ExpensesPage() {
   return (
     <div className="min-h-screen sky p-4 pt-16">
       {/* Header with title and gold amount */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
-        <h1 className="text-2xl font-bold mb-4 sm:mb-0">Uso del oro</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-center">
+        <h1 className="text-2xl font-bold">Uso del oro</h1>
       </div>
 
       <div className="max-w-4xl mx-auto mb-6">
