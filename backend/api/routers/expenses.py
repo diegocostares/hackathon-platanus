@@ -2,7 +2,7 @@ from ninja import Router
 from typing import List
 from django.shortcuts import get_object_or_404
 from api.models import Expenses
-from api.schemas import ExpenseSchema
+from api.schemas import ExpenseSchema, ExpenseCreateSchema
 
 
 # Create a router for expenses
@@ -17,4 +17,9 @@ def list_expenses(request):
 @router.get("/{expense_id}", response=ExpenseSchema)
 def get_expense(request, expense_id: int):
     expense = get_object_or_404(Expenses, id=expense_id)
+    return expense
+
+@router.post("/", response=ExpenseSchema)
+def create_expense(request, payload: ExpenseCreateSchema):
+    expense = Expenses.objects.create(**payload.dict())
     return expense
