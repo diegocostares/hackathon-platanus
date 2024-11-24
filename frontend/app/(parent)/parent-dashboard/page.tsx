@@ -6,63 +6,30 @@ import { IconoActualizacion } from "./_components/IconoActualizacion";
 import { TablaTransacciones } from "./_components/TablaTransacciones";
 import { GraficoTorta } from "./_components/GraficoTorta";
 import { PromediosCategorias } from "./_components/PromediosCategorias";
-
-const transaccionesMock = [
-  {
-    id: 1,
-    item: {
-      id: 1,
-      name: "Chupalla",
-      price: 1000,
-      description: "Chupalla de dragón.",
-      category: "Ropa",
-    },
-    quantity: 2,
-  },
-  {
-    id: 2,
-    item: {
-      id: 2,
-      name: "Polera Platanus",
-      price: 2500,
-      description: "Una polera poderosa",
-      category: "Ropa",
-    },
-    quantity: 1,
-  },
-  {
-    id: 3,
-    item: {
-      id: 3,
-      name: "Chaqueta",
-      price: 1500,
-      description: "Una chaqueta estilosa",
-      category: "Ropa",
-    },
-    quantity: 1,
-  },
-  {
-    id: 4,
-    item: {
-      id: 4,
-      name: "Chocolate",
-      price: 1500,
-      description: "Muy rico chocolate",
-      category: "Comida",
-    },
-    quantity: 1,
-  },
-];
+import { getInventory } from "@/api/getInventories";
 
 export default function ParentDashboardPage() {
   const [mesada, setMesada] = useState<number | null>(null);
   const [mostrarActualizacion, setMostrarActualizacion] = useState(false);
-  const [transacciones, setTransacciones] = useState(transaccionesMock);
+  const [transacciones, setTransacciones] = useState<any[]>([]);
 
   const handleConfiguracionMesada = (nuevaMesada: number) => {
     setMesada(nuevaMesada);
     setMostrarActualizacion(true);
   };
+
+  useEffect(() => {
+    const cargarTransacciones = async () => {
+      try {
+        const data = await getInventory();
+        setTransacciones(data);
+      } catch (error) {
+        console.error("Error al cargar transacciones:", error);
+      }
+    };
+
+    cargarTransacciones();
+  }, []);
 
   useEffect(() => {
     if (mostrarActualizacion) {
