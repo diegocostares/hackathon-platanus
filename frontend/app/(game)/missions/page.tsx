@@ -5,7 +5,8 @@ import { Progress } from "@/components/ui/progress";
 import { Trophy } from "lucide-react";
 import { getMissions } from "@/api/missions";
 import { switchMissionStatus } from "@/api/missions";
-import { updateAllowance } from "@/api/allowances";
+import { updateAllowance, getAllowance } from "@/api/allowances";
+import DragonAnimation from "@/components/DragonAnimation";
 
 const ALLOWANCE_ID = 1;
 
@@ -23,6 +24,27 @@ interface Task {
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  useEffect(() => {
+    async function fetchAllowance() {
+      try {
+        const data = await getAllowance();
+        if (data.amount > 1150) {
+          const animationShown = localStorage.getItem("animationShown");
+          if (!animationShown) {
+            setShowAnimation(true);
+            localStorage.setItem("animationShown", "true");
+            console.log("Allowance amount:", data.amount);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch allowance", error);
+      }
+    }
+
+    fetchAllowance();
+  }, []);
 
   useEffect(() => {
     async function fetchMissions() {
@@ -55,24 +77,49 @@ export default function Tasks() {
     const task = tasks.find((task) => task.id === id);
     if (!task) return;
 
-    try {
-      const updatedTask = await switchMissionStatus(id);
+    // Cambiar estado local inmediatamente
+    const newStatus = task.status === "completed" ? "pending" : "completed";
 
-      const newStatus = updatedTask.status;
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, status: newStatus } : task
+      )
+    );
+
+    try {
+      // Realizar la petición al servidor para actualizar el estado
+      await switchMissionStatus(id);
+
       const action = newStatus === "completed" ? "add" : "subtract";
       const amount = task.reward_amount;
 
       await updateAllowance(ALLOWANCE_ID, amount, action);
 
-      setTasks(
-        tasks.map((task) =>
-          task.id === id ? { ...task, status: newStatus } : task
-        )
-      );
+      // Consultar el allowance actualizado
+      const allowanceData = await getAllowance();
+      console.log("Updated Allowance Amount:", allowanceData.amount);
+      if (allowanceData.amount > 1200) {
+        const animationShown = localStorage.getItem("animationShown");
+        if (!animationShown) {
+          setShowAnimation(true);
+          localStorage.setItem("animationShown", "true");
+        }
+      }
     } catch (error) {
       console.error("Failed to update task or allowance:", error);
+
+      // Revertir el estado local en caso de error
+      setTasks(
+        tasks.map((task) =>
+          task.id === id ? { ...task, status: task.status } : task
+        )
+      );
     }
   };
+
+  if (showAnimation) {
+    return <DragonAnimation />;
+  }
 
   if (loading) {
     return (
