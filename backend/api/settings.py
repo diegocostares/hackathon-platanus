@@ -216,17 +216,6 @@ ALLOWED_HOSTS = [
     "http://diegocostar.me/",
 ]
 
-INSTALLED_APPS = [
-    # ...
-    "corsheaders",
-    # ...
-]
-
-MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
-    # ...
-]
-
 CORS_ALLOWED_ORIGINS = [
     "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
 ]
