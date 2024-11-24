@@ -111,6 +111,7 @@ class ItemSchema(Schema):
     name: str
     price: int
     description: str
+    category: str
 
 
 # ----------------------- Inventories Schemas -----------------------

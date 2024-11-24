@@ -34,20 +34,30 @@ class Command(BaseCommand):
         items_data = [
             {
                 'name': 'Chupalla',
-                'price': 50,
+                'price': 1000,
                 'description': 'Chupalla de dragón.',
+                'category': 'Ropa',
                 'quantity': 2
             },
             {
                 'name': 'Polera Platanus',
-                'price': 40,
+                'price': 2500,
                 'description': 'Una polera poderosa',
+                'category': 'Ropa',
                 'quantity': 1
             },
             {
                 'name': 'Chaqueta',
-                'price': 30,
+                'price': 1500,
                 'description': 'Una chaqueta estilosa',
+                'category': 'Ropa',
+                'quantity': 1
+            },
+            {
+                'name': 'Chocolate',
+                'price': 1500,
+                'description': 'Muy rico chocolate',
+                'category': 'Comida',
                 'quantity': 1
             }
         ]
@@ -57,6 +67,7 @@ class Command(BaseCommand):
                 name=item_data['name'],
                 price=item_data['price'],
                 description=item_data['description'],
+                category=item_data['category'],
             )
             Inventory.objects.create(
                 item=item,
