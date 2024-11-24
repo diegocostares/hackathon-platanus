@@ -24,20 +24,20 @@ export default function SavingGoalsPage() {
   const eggs = [
     { id: 1, image: "/3.png", unlocked: true, name: "Dragón Mañoso" },
     { id: 2, image: "/4.png", unlocked: true, name: "Dragón Mañoso Nivel 2" },
-    { id: 3, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 1" },
-    {
-      id: 4,
-      image: "/egg.svg",
-      unlocked: false,
-      name: "Dragón Volcán Nivel 1",
-    },
-    {
-      id: 5,
-      image: "/egg.svg",
-      unlocked: false,
-      name: "Dragón de Hielo Nivel 1",
-    },
+    { id: 3, image: "/egg.svg", unlocked: true, name: "Dragón Mañoso Nivel 3" },
+    { id: 4, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 1" },
+    { id: 5, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 2" },
+    { id: 6, image: "/egg.svg", unlocked: false, name: "Dragón Hada Nivel 3" },
+    { id: 7, image: "/egg.svg", unlocked: false, name: "Dragón Volcán Nivel 1" },
+    { id: 8, image: "/egg.svg", unlocked: false, name: "Dragón Volcán Nivel 2" },
+    { id: 9, image: "/egg.svg", unlocked: false, name: "Dragón Volcán Nivel 3" },
+    { id: 10, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 1" },
+    { id: 11, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 2" },
+    { id: 12, image: "/egg.svg", unlocked: false, name: "Dragón de Hielo Nivel 3" },
   ];
+
+  let dragon2Image = amount >= 1500 ? "/4.png" : "/egg.svg"
+  let dragon2unlocked = amount >= 1500 ? true : false
 
   const goals = [
     {
@@ -53,8 +53,8 @@ export default function SavingGoalsPage() {
       name: "Aliento de Fuego",
       description: "1500 de Oro Ahorrados",
       reward: "Dragón Mañoso Nivel 2",
-      unlocked: true,
-      image: "/4.png",
+      unlocked: dragon2unlocked,
+      image: dragon2Image,
     },
     {
       id: 3,
