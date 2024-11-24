@@ -214,7 +214,3 @@ ALLOWED_HOSTS = [
     "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
     "http://diegocostar.me/",
 ]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://main.d2xt9d1jaewt8a.amplifyapp.com/",
-]
