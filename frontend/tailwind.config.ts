@@ -65,6 +65,17 @@ const config: Config = {
         "radial-sky":
           "radial-gradient(60% 120% at 50% 50%, hsla(200, 80%, 92%, 0) 0%, rgba(186, 230, 253, 0.5) 100%)",
       },
+      keyframes: {
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-10px)" },
+          "75%": { transform: "translateX(10px)" },
+        },
+      },
+      animation: {
+        shake: "shake 0.5s ease-in-out infinite",
+        "bounce-slow": "bounce 2s infinite",
+      },
     },
   },
   plugins: [animate],
