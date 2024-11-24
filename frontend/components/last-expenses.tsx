@@ -10,7 +10,7 @@ export default function LastExpenses() {
   ];
 
   return (
-    <div className="fixed bottom-[140px] w-full px-4">
+    <div className="w-full px-4 mt-2">
       <div className="bg-white rounded-md shadow-md p-4">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-lg font-bold text-gray-800">Últimos gastos</h2>
